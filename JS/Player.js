@@ -7,7 +7,7 @@ export class Player {
         this.setId();
         this.cards=[]
     }
-
+//TODO set unique ID
     setId(){
         let idCount=0;
         this.id = ++idCount;
