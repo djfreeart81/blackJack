@@ -9,6 +9,7 @@ export class Player {
         this.bet = 0
         this.isPlaying = true
         this.hasBet = false
+        this.isDone = false
     }
 
     setId(){
@@ -54,14 +55,16 @@ export class Player {
 
         document.getElementById(`player${this.getId()}`).style.borderColor = colors[bool].border
         document.getElementById(`player${this.getId()}`).style.backgroundColor = "LightCoral"
-        document.getElementById(`player${this.getId()}-button`).style.borderColor = "red"
+        document.getElementById(`player${this.getId()}-button-box`).style.borderColor = "red"
         document.getElementById(`player${this.getId()}-new-card`).disabled = bool
     }
     endRound(){
         this.isPlaying = false
         document.getElementById(`player${this.getId()}-done`).disabled = true
+        document.getElementById(`player${this.getId()}-bet`).disabled = true
         this.setPlayerBorderRed(true)
     }
+
 }
 
 let idCount=0;
