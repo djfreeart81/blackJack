@@ -14,38 +14,32 @@ body {
     top: 5%;
     left: 40%;
     text-align: center;
-    font-size: x-large;
+    font-size: xx-large;
+}
+
+.player {
+    background-color: darkgray;
+    width: 200px;
+    border: 5px solid green;
+    padding: 10px;
+    margin: 10px;
+    color: black;
+    position: fixed;
+    text-align: center;
+    font-size: xx-large;
 }
 
 .player1 {
-    background-color: darkgray;
-    width: 200px;
-    border: 5px solid green;
-    padding: 10px;
-    margin: 10px;
-    color: black;
-    position: fixed;
     top: 200px;
     left: 50px;
-    text-align: center;
-    font-size: x-large;
 }
 
 .player2 {
-    background-color: darkgray;
-    width: 200px;
-    border: 5px solid green;
-    padding: 10px;
-    margin: 10px;
-    color: black;
-    position: fixed;
     top: 200px;
     right: 200px;
-    text-align: center;
-    font-size: x-large;
 }
 
-.player1-button {
+.player1-button-box {
     background-color: darkgray;
     width: 50px;
     height: 100px;
@@ -58,91 +52,7 @@ body {
     position: absolute;
 }
 
-.player1-button .new-card {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
-}
-
-.player1-button .new-card:disabled{
-    background-color: grey; /* Green */
-    border: 1px solid grey;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
-}
-
-.player1-button .bet {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
-}
-
-.player1-button .bet:disabled {
-    background-color: grey; /* Green */
-    border: 1px solid grey;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
-}
-
-.player1-button .done {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
-}
-
-.player1-button .done:disabled {
-    background-color: grey; /* Green */
-    border: 1px solid grey;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
-}
-
-.player2-button {
+.player2-button-box {
     background-color: darkgray;
     width: 50px;
     height: 100px;
@@ -155,33 +65,7 @@ body {
     position: absolute;
 }
 
-.player2-button .new-card {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    display: block;
-}
-
-.player2-button .new-card:disabled {
-    background-color: grey; /* Green */
-    border: 1px solid grey;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    display: block;
-}
-
-.player2-button .bet {
+.button-player {
     background-color: #4CAF50; /* Green */
     border: 1px solid green;
     color: white;
@@ -195,33 +79,7 @@ body {
     display: block;
 }
 
-.player2-button .bet:disabled {
-    background-color: grey; /* Green */
-    border: 1px solid grey;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
-}
-.player2-button .done {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
-}
-.player2-button .done:disabled {
+.button-player:disabled{
     background-color: grey; /* Green */
     border: 1px solid grey;
     color: white;
@@ -236,7 +94,7 @@ body {
 }
 
 .annonce {
-    background-color: darkgray;
+    background-color: rgb(152, 181, 219);
     width: 200px;
     height: 50px;
     border: 5px solid rgb(107, 151, 107);

@@ -16,16 +16,18 @@ console.log(`Player ${player2.name} created with id ${player2.id} and ${player2.
 main();
 
 function main(){
-    initializeCards()
-
-
+    initializeGame()
+    
+    if(!player1.hasBet && player1.isPlaying || !player2.hasBet && player2.isPlaying){
+        makeYourBet()
+    }
 
     update()
     
     console.log(`${cardDeck.length} remaining cards in Deck`)
 }
 
-function initializeCards(){
+function initializeGame(){
     
     cardDeck = new CardDeck(4)
     console.log(`Deck created with ${cardDeck.length} cards`)
@@ -38,11 +40,6 @@ function initializeCards(){
     bank.cards.push(cardDeck.getCard(), cardDeck.getCard())
     drawBank()
 
-    document.getElementById("info").innerHTML = "Make your bet!"
-
-}
-
-function update(){
     players.forEach( (player) => {
         if(document.getElementById(`player${player.id}-new-card`)) {
             document.getElementById(`player${player.id}-new-card`).addEventListener("click", (event) => {
@@ -57,6 +54,20 @@ function update(){
             })
         }
     })
+    let elementsNewCard = document.getElementsByClassName("new-card")
+    for (let el of elementsNewCard) {
+        el.disabled = true
+    }
+}
+
+function makeYourBet(){
+    document.getElementById("info").innerHTML = "Make your bet within 10s or click Done!"
+    setTimeout(() => {return}, 10000)
+    //TODO: delay by 10s until the main program continues
+}
+
+function update(){
+
 }
 
 function drawPlayer(player){
