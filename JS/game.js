@@ -18,6 +18,8 @@ main();
 function main(){
     initializeCards()
 
+
+
     update()
     
     console.log(`${cardDeck.length} remaining cards in Deck`)
@@ -35,6 +37,9 @@ function initializeCards(){
     drawPlayer(player2)
     bank.cards.push(cardDeck.getCard(), cardDeck.getCard())
     drawBank()
+
+    document.getElementById("info").innerHTML = "Make your bet!"
+
 }
 
 function update(){
@@ -103,7 +108,6 @@ function addNewCard(player){
     $playerCards.innerHTML += newCard.image
     console.log(`card added and total value is ${player.getCardValue()}`)
     if(player.getCardValue()>21) {
-        player.isPlaying = false
-        player.setPlayerBorderRed(true)
+        player.endRound()
     }
 }

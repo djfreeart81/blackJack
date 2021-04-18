@@ -16,6 +16,7 @@ body {
     text-align: center;
     font-size: x-large;
 }
+
 .player1 {
     background-color: darkgray;
     width: 200px;
@@ -113,6 +114,34 @@ body {
     display: block;
 }
 
+.player1-button .done {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    color: white;
+    padding: 1px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    width: 50px;
+    margin: 1px;
+    display: block;
+}
+
+.player1-button .done:disabled {
+    background-color: grey; /* Green */
+    border: 1px solid grey;
+    color: white;
+    padding: 1px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    width: 50px;
+    margin: 1px;
+    display: block;
+}
+
 .player2-button {
     background-color: darkgray;
     width: 50px;
@@ -178,4 +207,45 @@ body {
     width: 50px;
     margin: 1px;
     display: block;
+}
+.player2-button .done {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    color: white;
+    padding: 1px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    width: 50px;
+    margin: 1px;
+    display: block;
+}
+.player2-button .done:disabled {
+    background-color: grey; /* Green */
+    border: 1px solid grey;
+    color: white;
+    padding: 1px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    width: 50px;
+    margin: 1px;
+    display: block;
+}
+
+.annonce {
+    background-color: darkgray;
+    width: 200px;
+    height: 50px;
+    border: 5px solid rgb(107, 151, 107);
+    padding: 10px;
+    margin: 10px;
+    color: black;
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    text-align: center;
+    font-size: x-large;
 }

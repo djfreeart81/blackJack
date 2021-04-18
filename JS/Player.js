@@ -41,6 +41,7 @@ export class Player {
         let $playerMoney = document.getElementById(`player${this.id}-money`)
         $playerMoney.innerHTML = this.money + " $"
         this.hasBet = true
+        document.getElementById(`player${this.getId()}-bet`).disabled = true
         console.log(`player ${this.name} bet ${this.bet}`)
     }
 
@@ -55,9 +56,12 @@ export class Player {
         document.getElementById(`player${this.getId()}`).style.backgroundColor = "LightCoral"
         document.getElementById(`player${this.getId()}-button`).style.borderColor = "red"
         document.getElementById(`player${this.getId()}-new-card`).disabled = bool
-
     }
-    
+    endRound(){
+        this.isPlaying = false
+        document.getElementById(`player${this.getId()}-done`).disabled = true
+        this.setPlayerBorderRed(true)
+    }
 }
 
 let idCount=0;
