@@ -3,16 +3,15 @@ import {CardDeck} from './CardDeck.js'
 import { Bank } from './Bank.js'
 
 const player1 = new Player('GG',1000)
-const player2 = new Player('Lenny',10)
+const player2 = new Player('Lenny',1000)
+const BET = 5
 player2.id=2
+let players = [player1,player2]
 let cardDeck
-const bank = new Bank();
+const bank = new Bank()
 
 console.log(`Player ${player1.name} created with id ${player1.id} and ${player1.money} $`)
 console.log(`Player ${player2.name} created with id ${player2.id} and ${player2.money} $`)
-console.log(`Deck created with ${cardDeck.length} cards`)
-console.log(cardDeck)
-
 
 main();
 
@@ -21,14 +20,15 @@ function main(){
 
     update()
     
-
     console.log(`${cardDeck.length} remaining cards in Deck`)
 }
 
 function initializeCards(){
     
-    
     cardDeck = new CardDeck(4)
+    console.log(`Deck created with ${cardDeck.length} cards`)
+    console.log(cardDeck)
+    
     player1.cards.push(cardDeck.getCard(), cardDeck.getCard())
     drawPlayer(player1)
     player2.cards.push(cardDeck.getCard(), cardDeck.getCard())
@@ -38,7 +38,20 @@ function initializeCards(){
 }
 
 function update(){
-
+    players.forEach( (player) => {
+        if(document.getElementById(`player${player.id}-new-card`)) {
+            document.getElementById(`player${player.id}-new-card`).addEventListener("click", (event) => {
+                event.preventDefault()
+                addNewCard(player)
+            })
+        }
+        if(document.getElementById(`player${player.id}-bet`)) {
+            document.getElementById(`player${player.id}-bet`).addEventListener("click", (event) => {
+                event.preventDefault()
+               player.betMoney(BET)
+            })
+        }
+    })
 }
 
 function drawPlayer(player){
@@ -58,7 +71,7 @@ function drawPlayer(player){
         cards.remove()
     }
     let $playerCards = document.createElement('div')
-    $playerCards.id = = `player${player.id}-cards`
+    $playerCards.id = `player${player.id}-cards`
     $playerCards.innerHTML = player.cards.reduce((acc, i) => acc + i.image, "")
     $player.appendChild($playerCards)
 }
@@ -70,7 +83,7 @@ function drawBank(player){
     $bank.appendChild($bankCards)
 }
 
-funtion clearCards(){
+function clearCards(){
     player1.cards = []
     player2.cards = []
     bank.cards = []
@@ -80,5 +93,17 @@ funtion clearCards(){
         cards.remove()
     }
     let $bank = document.getElementById('bank')
-    
+}
+
+function addNewCard(player){
+    let newCard = cardDeck.getCard()
+    player.cards.push(newCard)
+    let $player = document.getElementById('player'+player.id)
+    let $playerCards = document.getElementById(`player${player.id}-cards`)
+    $playerCards.innerHTML += newCard.image
+    console.log(`card added and total value is ${player.getCardValue()}`)
+    if(player.getCardValue()>21) {
+        player.isPlaying = false
+        player.setPlayerBorderRed(true)
+    }
 }
