@@ -53,7 +53,6 @@ function initializeGame(){
             document.getElementById(`player${player.id}-done`).addEventListener("click", (event) => {
                 event.preventDefault()
                 document.getElementById(`player${player.getId()}-done`).disabled = true
-                document.getElementById(`player${player.getId()}-new-card`).disabled = true
                 player.isDone = true
             })
         }
@@ -94,6 +93,9 @@ function makeYourBet(){
 
 function waitDone(playersArray){
     document.getElementById("info").innerHTML = "Add card or click done within 30s!"
+    playersArray.forEach( (player) => {
+        document.getElementById(`player${player.getId()}-new-card`).disabled = false
+    })
 
     let timeCount =0
     let id = setInterval( () =>{
@@ -101,7 +103,7 @@ function waitDone(playersArray){
             clearInterval(id)
             bankPlay()
         }
-        if(++timeCount > 30) {
+        if(++timeCount > 15) {
             clearInterval(id)
             bankPlay()
         }
@@ -110,6 +112,12 @@ function waitDone(playersArray){
 
 function bankPlay(){
     //TODO: implement bank add card until 17, then calculate gains
+    if(bank.calculateScore()>16){
+        endRound()
+    } else {
+        bank.cards.push(cardDeck.getCard())
+        bankPlay()
+    }
 }
 
 function drawPlayer(player){
@@ -163,4 +171,8 @@ function addNewCard(player){
     if(player.getCardValue()>21) {
         player.endRound()
     }
+}
+
+function endRound(){
+    console.log(`Round ended, bank score is ${bank.calculateScore()}, player1 is ${player1.calculateScore()}, player2 is ${player2.calculateScore()}`)
 }
