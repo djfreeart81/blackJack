@@ -115,7 +115,12 @@ function bankPlay(){
     if(bank.calculateScore()>16){
         endRound()
     } else {
-        bank.cards.push(cardDeck.getCard())
+        let newCard = cardDeck.getCard()
+        bank.cards.push(newCard)
+        let $bank = document.getElementById('bank')
+        let $bankCards = document.getElementById(`bank-cards`)
+        $bankCards.innerHTML += newCard.image
+        console.log(`card added and total value is ${bank.getCardValue()}`)
         bankPlay()
     }
 }
@@ -175,4 +180,18 @@ function addNewCard(player){
 
 function endRound(){
     console.log(`Round ended, bank score is ${bank.calculateScore()}, player1 is ${player1.calculateScore()}, player2 is ${player2.calculateScore()}`)
+    bank.score = bank.calculateScore()
+    let winners = []
+    players.forEach( (player) => {
+        if(player.calculateScore>21) {return}
+        if(player.calculateScore > bank.score || bank.score>21) {
+            winners.push(player)
+            player.money += player.bet *2
+        }
+    })
+    if(winners.length === 0){
+        document.getElementById("info").innerHTML = `Sorry, the bank won!`
+    } else {
+        winners.forEach( () => document.getElementById("info").innerHTML = `Congratulation ${highScore.name}! You won ${BET*2}$`)
+    }
 }

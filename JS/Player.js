@@ -68,7 +68,7 @@ export class Player {
         //TODO: logic to be reviewed, should be the max possible => evaluate all possibilities
         let cardValues = this.cards.map( ({value}) => value).sort( (a,b) => b-a)
         return cardValues.reduce( (acc, val) => {
-            return val===1 && acc+val+10 <21 ? acc+val+10 : acc+val
+            return val===1 && acc+val+10 <=21 ? acc+val+10 : acc+val
         },0)
     }
 }

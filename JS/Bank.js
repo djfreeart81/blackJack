@@ -1,6 +1,8 @@
 export class Bank{
     constructor(){
-        this.cards=[]
+        this.name = "bank"
+        this.cards = []
+        this.score = 0
     }
 
 /**
@@ -12,5 +14,9 @@ export class Bank{
         return cardValues.reduce( (acc, val) => {
             return val===1 && acc+val <8 ? acc+val+10 : acc+val
         },0)
+    }
+
+    getCardValue(){
+        return this.cards.reduce( (acc, card) => acc+card.value,0)
     }
 }
