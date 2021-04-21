@@ -2,15 +2,14 @@ import bank from '/Bank.js'
 import player from '/Player.js'
 
 class Round {
-    constructor(players){
+    constructor(players, nbCardDeck){
         this.players = players;
-        this.round = null;
-        this.bank = null;
+        this.bank = new Bank();
+        this.cardDeck = new CardDeck(nbCardDeck)
     }
 
     startRound(){
         this.round = new Round();
-    }
-
-    
+        
+    }   
 }
