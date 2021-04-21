@@ -5,7 +5,7 @@ import { Bank } from './Bank.js'
 const player1 = new Player('GG',1000)
 const player2 = new Player('Lenny',1000)
 const BET = 5
-player2.id=2
+//player2.id=2
 let players = [player1,player2]
 let cardDeck
 const bank = new Bank()
@@ -66,24 +66,17 @@ function initializeGame(){
 function makeYourBet(){
     document.getElementById("info").innerHTML = "Make your bet within 10s or click Done!"
     
-    let timeCount =0
+    let timeCount = 0
     let id = setInterval( () =>{
-        if((player1.hasBet || !player1.isPlaying) && (player2.hasBet || !player2.isPlaying)){
+        if( ((player1.hasBet || !player1.isPlaying) && (player2.hasBet || !player2.isPlaying)) || ++timeCount > 10 ){
             clearInterval(id)
             let playersToContinue = []
             players.forEach( (player) => {
                 if(player.hasBet && player.isPlaying){
                     playersToContinue.push(player)
-                }
-            })
-            waitDone(playersToContinue)
-        }
-        if(++timeCount > 10) {
-            clearInterval(id)
-            let playersToContinue = []
-            players.forEach( (player) => {
-                if(player.hasBet && player.isPlaying){
-                    playersToContinue.push(player)
+                    document.getElementById(`player${player.getId()}-bet`).disabled = true
+                } else {
+                    player.endRound()
                 }
             })
             waitDone(playersToContinue)
@@ -99,11 +92,7 @@ function waitDone(playersArray){
 
     let timeCount =0
     let id = setInterval( () =>{
-        if(player1.isDone && player2.isDone){
-            clearInterval(id)
-            bankPlay()
-        }
-        if(++timeCount > 15) {
+        if( (player1.isDone && player2.isDone) || ++timeCount > 15){
             clearInterval(id)
             bankPlay()
         }
@@ -111,7 +100,6 @@ function waitDone(playersArray){
 }
 
 function bankPlay(){
-    //TODO: implement bank add card until 17, then calculate gains
     if(bank.calculateScore()>16){
         endRound()
     } else {
