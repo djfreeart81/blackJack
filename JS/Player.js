@@ -65,10 +65,14 @@ export class Player {
         this.setPlayerBorderRed(true)
     }
     calculateScore(){
-        //TODO: logic to be reviewed, should be the max possible => evaluate all possibilities
         let cardValues = this.cards.map( ({value}) => value).sort( (a,b) => b-a)
+        let numberOfOnes = cardValues.filter( number => number === 1).length
         return cardValues.reduce( (acc, val) => {
-            return val===1 && acc+val+10 <=21 ? acc+val+10 : acc+val
+            if( (val === 1 && numberOfOnes-- >1) || val !== 1) {
+                return acc+val
+            } else {
+                return acc+val+10 <=21 ? acc+val+10 : acc+val
+            }
         },0)
     }
 }
