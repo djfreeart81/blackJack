@@ -40,6 +40,7 @@ export class Round {
             player.isDone, player.hasBet = false
             player.isPlaying = true
             this.clearCards()
+            player.setPlayerBorderRed(false)
         })
         let elementsNewCard = document.getElementsByClassName("new-card")
         for (let el of elementsNewCard) {
@@ -57,6 +58,7 @@ export class Round {
 
     drawPlayerCards(player){
         document.getElementById(`player${player.getId()}-cards`).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "")
+        document.getElementById(`player${player.getId()}-score`).innerHTML = player.calculateScore()
     }
 
     drawBankCards(){
