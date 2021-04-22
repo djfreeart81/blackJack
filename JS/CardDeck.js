@@ -1,12 +1,12 @@
 export class CardDeck{
-    constructor(nbDecks){
-        this.cardDeck = this.generateCardDeck(nbDecks)
+    constructor(cardDeckSize){
+        this.cardDeck = this.generateCardDeck(cardDeckSize)
     }
 
-    generateCardDeck(nbDecks){
+    generateCardDeck(cardDeckSize){
         /**
          *@returns an array of objects: value: value of the card, image: its unicode character
-         *@param nbDecks int number of decks to be created
+         *@param cardDeckSize int number of decks to be created
          */
         let cardDeck = []
         // Cards in Unicode are 0x1F0 + [A,B,C or D] + [number which is a letter for figures]
@@ -15,7 +15,7 @@ export class CardDeck{
         const VALUE=[1,2,3,4,5,6,7,8,9,10,10,10,10]
         //colors in Unicode = ['\u2660', '\u2665', '\u2666', '\u2663']
 
-        for (let k=0; k<nbDecks; k++){
+        for (let k=0; k<cardDeckSize; k++){
             for (let j=0; j<FAMILY_UNICODE.length; j++){
                 for (let i=0; i<VALUE_UNICODE.length; i++){
                     cardDeck.push({value: VALUE[i],

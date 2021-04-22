@@ -38,12 +38,16 @@ export class Player {
             return
         }
         this.bet = amount
-        this.money -= amount
-        let $playerMoney = document.getElementById(`player${this.id}-money`)
-        $playerMoney.innerHTML = this.money + " $"
+        this.updateMoney(-amount)
         this.hasBet = true
         document.getElementById(`player${this.getId()}-bet`).disabled = true
         console.log(`player ${this.name} bet ${this.bet}`)
+    }
+
+    updateMoney(amount){
+        this.money += amount
+        let $playerMoney = document.getElementById(`player${this.id}-money`)
+        $playerMoney.innerHTML = this.money + " $"
     }
 
     /**
