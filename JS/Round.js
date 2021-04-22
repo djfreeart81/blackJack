@@ -45,6 +45,14 @@ export class Round {
         for (let el of elementsNewCard) {
             el.disabled = true
         }
+        let elementsBet = document.getElementsByClassName("bet")
+        for (let el of elementsBet) {
+            el.disabled = false
+        }
+        let elementsDone = document.getElementsByClassName("done")
+        for (let el of elementsDone) {
+            el.disabled = false
+        }
     }
 
     drawPlayerCards(player){
