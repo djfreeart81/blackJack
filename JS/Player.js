@@ -65,6 +65,7 @@ export class Player {
     }
     endRound(){
         this.isPlaying = false
+        this.isDone = true
         document.getElementById(`player${this.getId()}-done`).disabled = true
         document.getElementById(`player${this.getId()}-bet`).disabled = true
         this.setPlayerBorderRed(true)
