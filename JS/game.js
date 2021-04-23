@@ -6,7 +6,7 @@ import {Game} from './GameClass.js'
 
 const player1 = new Player('GG',1000)
 const player2 = new Player('Lenny',1000)
-let players = [player1,player2]
+let players = []
 const CARD_DECK_SIZE = 4
 const game = new Game(players)
 let round
@@ -19,10 +19,12 @@ game.initializeGame()
 main()
 
 function main(){
-    round = new Round(players, CARD_DECK_SIZE)
+    round = new Round([player1,player2], CARD_DECK_SIZE)
     round.initializeRound()
     console.log(`round initialized`)
     bank = round.bank
+    players = round.players
+    
     if(!player1.hasBet && player1.isPlaying || !player2.hasBet && player2.isPlaying){
         makeYourBet()
     }
@@ -38,19 +40,18 @@ function makeYourBet(){
             let playersToContinue = []
             players.forEach( (player) => {
                 if(player.hasBet && player.isPlaying){
-                    playersToContinue.push(player)
                     document.getElementById(`player${player.getId()}-bet`).disabled = true
                 } else {
                     player.endRound()
                 }
             })
-            waitDone(playersToContinue)
+            waitDone()
         }
     },1000)
 }
 
-function waitDone(playersArray){
-    playersArray.forEach( player => {
+function waitDone(){
+    players.forEach( player => {
         player.cards.push(round.cardDeck.getCard(), round.cardDeck.getCard())
         document.getElementById(`player${player.getId()}-new-card`).disabled = false
         round.drawPlayerCards(player)
@@ -64,10 +65,11 @@ function waitDone(playersArray){
     let id = setInterval( () =>{
         if(++timeCount > 20) {
             clearInterval(id)
-            for (let player in playersArray){player.endRound()}
+            for (let player in players){player.endRound()}
         }
         if(player1.isDone && player2.isDone){
             clearInterval(id)
+            for (let player in players){player.finalScore = player.calculateScore()}
             bankPlay()
         }
     },1000)
@@ -90,8 +92,8 @@ function endRound(){
     bank.score = bank.calculateScore()
     let winners = []
     players.forEach( (player) => {
-        if(player.calculateScore() > 21) {return}
-        if(player.calculateScore() > bank.score || bank.score>21) {
+        if(player.finalScore > 21) {return}
+        if(player.finalScore > bank.score || bank.score>21) {
             console.log(`player ${player.name} has won`)
             winners.push(player)
         }
