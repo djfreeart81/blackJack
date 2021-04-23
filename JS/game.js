@@ -58,11 +58,15 @@ function waitDone(playersArray){
     bank.cards.push(round.cardDeck.getCard())
     round.drawBankCards(bank)
 
-    document.getElementById("info").innerHTML = "Add card or click done within 30s!"
+    document.getElementById("info").innerHTML = "Add card or click done within 20s!"
 
     let timeCount =0
     let id = setInterval( () =>{
-        if( (player1.isDone && player2.isDone) || ++timeCount > 15){
+        if(++timeCount > 20) {
+            clearInterval(id)
+            for (let player in playersArray){player.endRound()}
+        }
+        if(player1.isDone && player2.isDone){
             clearInterval(id)
             bankPlay()
         }
