@@ -10,6 +10,7 @@ export class Player {
         this.isPlaying = true
         this.hasBet = false
         this.isDone = false
+        this.finalScore = 0
     }
 
     setId(){
