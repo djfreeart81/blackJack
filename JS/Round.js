@@ -73,6 +73,7 @@ export class Round {
         $playerCards.innerHTML += newCard.image
         console.log(`card added and total value is ${player.getCardValue()}`)
         if(player.getCardValue()>21) {
+            this.players.pop(player)
             player.endRound()
         }
     }
