@@ -90,7 +90,6 @@ function endRound(){
         if(player.calculateScore() > bank.score || bank.score>21) {
             console.log(`player ${player.name} has won`)
             winners.push(player)
-            player.money += player.bet *2
         }
     })
     console.log(`winners are ${winners}`)
