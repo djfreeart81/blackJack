@@ -28,7 +28,7 @@ export class Round {
             if(document.getElementById(`player${player.id}-bet`)) {
                 document.getElementById(`player${player.id}-bet`).addEventListener("click", (event) => {
                     event.preventDefault()
-                    player.betMoney(this.BET)
+                    player.betMoney(player.bet)
                 })
             }
             if(document.getElementById(`player${player.id}-done`)) {
