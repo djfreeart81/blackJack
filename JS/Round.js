@@ -71,6 +71,7 @@ export class Round {
 
     drawBankCards(){
         document.getElementById('bank-cards').innerHTML = this.bank.cards.reduce((acc, i) => acc + i.image, "")
+        document.getElementById(`bank-score`).innerHTML = bank.calculateScore()
     }
 
     addNewCard(player){
