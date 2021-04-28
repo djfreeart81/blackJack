@@ -39,7 +39,8 @@ export class Round {
                 })
             }
             // initialize players
-            player.isDone, player.hasBet = false
+            player.isDone = false
+            player.hasBet = false
             player.isPlaying = true
             this.clearCards()
             document.getElementById(`player${player.getId()}-name`).innerHTML = player.getName()
@@ -85,10 +86,10 @@ export class Round {
 
     clearCards(){
         this.players.forEach( player => {
-            player.cards = []
+            player.cards.length = 0
             this.drawPlayerCards(player)
         })
-        bank.cards = []
+        bank.cards.length = 0
         this.drawBankCards()
     }
 }
