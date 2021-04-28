@@ -2,6 +2,7 @@ import {Bank} from './Bank.js'
 import {CardDeck} from './CardDeck.js'
 import { Game } from './GameClass.js'
 import {main} from './game.js'
+import {Player} from './Player.js'
 
 export class Round {
     constructor(players, cardDeckSize){
@@ -37,9 +38,12 @@ export class Round {
                     player.isDone = true
                 })
             }
+            // initialize players
             player.isDone, player.hasBet = false
             player.isPlaying = true
             this.clearCards()
+            document.getElementById(`player${player.getId()}-name`).innerHTML = player.getName()
+            document.getElementById(`player${player.getId()}-money`).innerHTML = player.getMoney() + "$"
             player.setPlayerBorderRed(false)
         })
         let elementsNewCard = document.getElementsByClassName("new-card")
@@ -54,11 +58,14 @@ export class Round {
         for (let el of elementsDone) {
             el.disabled = false
         }
+        console.log(`round initialized`)
     }
 
     drawPlayerCards(player){
-        document.getElementById(`player${player.getId()}-cards`).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "")
-        document.getElementById(`player${player.getId()}-score`).innerHTML = player.calculateScore()
+        if(document.getElementById(`player${player.getId()}-cards`)){
+            document.getElementById(`player${player.getId()}-cards`).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "")
+            document.getElementById(`player${player.getId()}-score`).innerHTML = player.calculateScore()
+        }
     }
 
     drawBankCards(){
@@ -68,10 +75,8 @@ export class Round {
     addNewCard(player){
         let newCard = this.cardDeck.getCard()
         player.cards.push(newCard)
-        let $player = document.getElementById('player'+player.id)
-        let $playerCards = document.getElementById(`player${player.id}-cards`)
-        $playerCards.innerHTML += newCard.image
-        console.log(`card added and total value is ${player.getCardValue()}`)
+        this.drawPlayerCards(player)
+        console.log(`card added for player${player.getId()} and value is ${newCard.value}`)
         if(player.getCardValue()>21) {
             this.players.pop(player)
             player.endRound()

@@ -59,8 +59,8 @@ export class Player {
         let colors={true: {border: "red", background: "LightCoral"}, false: {border:"green", background: "darkgray"}}
 
         document.getElementById(`player${this.getId()}`).style.borderColor = colors[bool].border
-        document.getElementById(`player${this.getId()}`).style.backgroundColor = "LightCoral"
-        document.getElementById(`player${this.getId()}-button-box`).style.borderColor = "red"
+        document.getElementById(`player${this.getId()}`).style.backgroundColor = colors[bool].background
+        document.getElementById(`player${this.getId()}-button-box`).style.borderColor = colors[bool].border
         document.getElementById(`player${this.getId()}-new-card`).disabled = bool
     }
     endRound(){

@@ -1,7 +1,7 @@
 import {Player} from './Player.js'
 import {CardDeck} from './CardDeck.js'
-import { Bank } from './Bank.js'
-import { Round } from './Round.js'
+import {Bank} from './Bank.js'
+import {Round} from './Round.js'
 import {Game} from './GameClass.js'
 
 const player1 = new Player('GG',1000)
@@ -21,9 +21,9 @@ main()
 function main(){
     round = new Round([player1,player2], CARD_DECK_SIZE)
     round.initializeRound()
-    console.log(`round initialized`)
     bank = round.bank
     players = round.players
+    console.log(`players: ${JSON.stringify(players)}`)
     
     if(!player1.hasBet && player1.isPlaying || !player2.hasBet && player2.isPlaying){
         makeYourBet()
@@ -31,6 +31,7 @@ function main(){
 }
 
 function makeYourBet(){
+    console.log(`make your bet launched`)
     document.getElementById("info").innerHTML = "Make your bet within 10s or click Done!"
     
     let timeCount = 0
@@ -51,6 +52,7 @@ function makeYourBet(){
 }
 
 function waitDone(){
+    console.log(`waitDone is launched`)
     players.forEach( player => {
         player.cards.push(round.cardDeck.getCard(), round.cardDeck.getCard())
         document.getElementById(`player${player.getId()}-new-card`).disabled = false
@@ -65,11 +67,11 @@ function waitDone(){
     let id = setInterval( () =>{
         if(++timeCount > 20) {
             clearInterval(id)
-            for (let player in players){player.endRound()}
+            for (let player of players){player.endRound()}
         }
         if(player1.isDone && player2.isDone){
             clearInterval(id)
-            for (let player in players){player.finalScore = player.calculateScore()}
+            for (let player of players){player.finalScore = player.calculateScore()}
             bankPlay()
         }
     },1000)
@@ -98,7 +100,6 @@ function endRound(){
             winners.push(player)
         }
     })
-    console.log(`winners are ${winners}`)
     document.getElementById("info").innerHTML = ""
     if(winners.length === 0){
         document.getElementById("info").innerHTML = `Sorry, the bank won!`
