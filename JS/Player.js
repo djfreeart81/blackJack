@@ -68,6 +68,7 @@ export class Player {
         this.isDone = true
         document.getElementById(`player${this.getId()}-done`).disabled = true
         document.getElementById(`player${this.getId()}-bet`).disabled = true
+        document.getElementById(`player${this.getId()}-new-card`).disabled = true
         this.setPlayerBorderRed(true)
     }
     calculateScore(){
