@@ -73,7 +73,9 @@ function waitDone(){
     let id = setInterval( () =>{
         if(++timeCount > 20) {
             clearInterval(id)
-            for (let player of players){player.endRound()}
+            for (let player of players){
+                player.isDone = true
+            }
         }
         if(player1.isDone && player2.isDone){
             clearInterval(id)
