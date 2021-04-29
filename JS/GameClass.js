@@ -8,6 +8,7 @@ export class Game{
     initializeGame(){
         this.players.forEach(player => this.drawPlayer(player))
         this.drawBank()
+        console.log('game initialized')
     }
 
     drawPlayer(player){
@@ -16,6 +17,7 @@ export class Game{
         $playerName.id = `player${player.id}-name`
         $playerName.innerHTML = player.name
         $player.appendChild($playerName)
+        console.log(JSON.stringify($playerName))
         
         let $playerMoney = document.createElement('div')
         $playerMoney.id = `player${player.id}-money`
@@ -27,9 +29,6 @@ export class Game{
         $player.appendChild($playerCards)
     }
     drawBank(){
-        let $bank = document.getElementById('bank')
-        let $bankCards = document.createElement('div')
-        $bankCards.id = `bank-cards`
-        $bank.appendChild($bankCards)
+        return
     }
 }

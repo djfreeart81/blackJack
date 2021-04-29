@@ -1,6 +1,6 @@
 import {Bank} from './Bank.js'
 import {CardDeck} from './CardDeck.js'
-import { Game } from './GameClass.js'
+import {Game} from './GameClass.js'
 import {main} from './game.js'
 import {Player} from './Player.js'
 
@@ -16,24 +16,29 @@ export class Round {
         // Create EventListener
         document.getElementById('new-round').addEventListener('click', (event) => {
             event.preventDefault()
+            event.stopImmediatePropagation()
             main()
         })
         this.players.forEach( (player) => {
             if(document.getElementById(`player${player.id}-new-card`)) {
                 document.getElementById(`player${player.id}-new-card`).addEventListener("click", (event) => {
                     event.preventDefault()
+                    event.stopImmediatePropagation()
                     this.addNewCard(player)
                 })
             }
             if(document.getElementById(`player${player.id}-bet`)) {
                 document.getElementById(`player${player.id}-bet`).addEventListener("click", (event) => {
                     event.preventDefault()
+                    event.stopImmediatePropagation()
+                    player.bet = this.BET
                     player.betMoney(player.bet)
                 })
             }
             if(document.getElementById(`player${player.id}-done`)) {
                 document.getElementById(`player${player.id}-done`).addEventListener("click", (event) => {
                     event.preventDefault()
+                    event.stopImmediatePropagation()
                     document.getElementById(`player${player.getId()}-done`).disabled = true
                     player.isDone = true
                 })
@@ -71,7 +76,7 @@ export class Round {
 
     drawBankCards(){
         document.getElementById('bank-cards').innerHTML = this.bank.cards.reduce((acc, i) => acc + i.image, "")
-        document.getElementById(`bank-score`).innerHTML = bank.calculateScore()
+        document.getElementById(`bank-score`).innerHTML = this.bank.calculateScore()
     }
 
     addNewCard(player){
@@ -87,10 +92,14 @@ export class Round {
 
     clearCards(){
         this.players.forEach( player => {
-            player.cards.length = 0
+            if(player.cards){
+                player.cards.length = 0
+            }
             this.drawPlayerCards(player)
         })
-        bank.cards.length = 0
+        if(bank.cards){
+            bank.cards.length = 0
+        }
         this.drawBankCards()
     }
 }

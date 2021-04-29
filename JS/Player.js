@@ -47,7 +47,7 @@ export class Player {
 
     updateMoney(amount){
         this.money += amount
-        let $playerMoney = document.getElementById(`player${this.id}-money`)
+        let $playerMoney = document.getElementById(`player${this.getId()}-money`)
         $playerMoney.innerHTML = this.money + " $"
     }
 

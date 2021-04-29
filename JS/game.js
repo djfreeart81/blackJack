@@ -6,7 +6,7 @@ import {Game} from './GameClass.js'
 
 const player1 = new Player('GG',1000)
 const player2 = new Player('Lenny',1000)
-let players = []
+let players = [player1, player2]
 const CARD_DECK_SIZE = 4
 const game = new Game(players)
 let round
