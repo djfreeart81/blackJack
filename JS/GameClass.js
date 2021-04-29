@@ -28,8 +28,13 @@ export class Game{
         $playerCards.id = `player${player.id}-cards`
         $player.appendChild($playerCards)
     }
+    
     drawBank(){
         return
+    }
+    
+    displayMessage(message){
+         document.getElementById("info").innerHTML = message
     }
     
     endGame(){
