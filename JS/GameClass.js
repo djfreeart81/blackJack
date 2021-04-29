@@ -31,4 +31,8 @@ export class Game{
     drawBank(){
         return
     }
+    
+    endGame(){
+        // Go to menu
+    }
 }
