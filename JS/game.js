@@ -31,6 +31,8 @@ function main(){
 }
 
 function makeYourBet(){
+    let playersToContinue = []
+    
     console.log(`make your bet launched`)
     document.getElementById("info").innerHTML = "Make your bet within 10s or click Done!"
     
@@ -38,7 +40,6 @@ function makeYourBet(){
     let id = setInterval( () =>{
         if( ((player1.hasBet || !player1.isPlaying) && (player2.hasBet || !player2.isPlaying)) || ++timeCount > 10 ){
             clearInterval(id)
-            let playersToContinue = []
             players.forEach( (player) => {
                 if(player.hasBet && player.isPlaying){
                     document.getElementById(`player${player.getId()}-bet`).disabled = true
@@ -46,6 +47,11 @@ function makeYourBet(){
                     player.endRound()
                 }
             })
+            if(playersToContinue.length === 0){
+                document.getElementById("info").innerHTML = "No player wants to play! Game Ended!"
+                game.endGame()
+                break
+               }
             waitDone()
         }
     },1000)
@@ -61,7 +67,7 @@ function waitDone(){
     bank.cards.push(round.cardDeck.getCard())
     round.drawBankCards(bank)
 
-    document.getElementById("info").innerHTML = "Add card or click done within 20s!"
+    game.displayMessage("Add card or click done within 20s!")
 
     let timeCount =0
     let id = setInterval( () =>{
