@@ -38,7 +38,13 @@ function makeYourBet(){
     
     let timeCount = 0
     let id = setInterval( () =>{
-        if( ((player1.hasBet || !player1.isPlaying) && (player2.hasBet || !player2.isPlaying)) || ++timeCount > 10 ){
+        if(playersToContinue.length === 0 && ++timeCount >10){
+            clearInterval(id)
+            document.getElementById("info").innerHTML = "No player wants to play! Game Ended!"
+            game.endGame()
+            return
+           }
+        if( ((player1.hasBet || !player1.isPlaying) && (player2.hasBet || !player2.isPlaying)) || timeCount > 10 ){
             clearInterval(id)
             players.forEach( (player) => {
                 if(player.hasBet && player.isPlaying){
@@ -47,11 +53,7 @@ function makeYourBet(){
                     player.endRound()
                 }
             })
-            if(playersToContinue.length === 0){
-                document.getElementById("info").innerHTML = "No player wants to play! Game Ended!"
-                game.endGame()
-                break
-               }
+            
             waitDone()
         }
     },1000)
