@@ -1,3 +1,5 @@
 Node/
 .vscode/
 *.drawio
+.babelrc
+node_modules

@@ -1,5 +1,5 @@
 
-export class Player {
+ export class Player {
     constructor(name, money){
         this.name = name
         this.money = money
@@ -85,3 +85,5 @@ export class Player {
 }
 
 let idCount=0;
+
+//module.exports = Player
