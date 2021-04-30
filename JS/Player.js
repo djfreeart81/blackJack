@@ -1,4 +1,3 @@
-
  export class Player {
     constructor(name, money){
         this.name = name
@@ -84,6 +83,4 @@
     }
 }
 
-let idCount=0;
-
-//module.exports = Player
+let idCount=0
