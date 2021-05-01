@@ -122,9 +122,9 @@ function endRound(){
             }
         }
     })
-    document.getElementById("info").innerHTML = ""
+    game.displayMessage("")
     if(winners.length === 0 && tie.length ===0){
-        document.getElementById("info").innerHTML = `Sorry, the bank won!`
+        game.displayMessage(`Sorry, the bank won!`)
     } else {
         winners.forEach( player => {
             if(player.cards.length === 2 && player.calculateScore() === 21){
