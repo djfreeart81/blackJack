@@ -116,10 +116,10 @@ function endRound(){
     } else {
         winners.forEach( (player) => {
             if(player.cards.length === 2 && player.calculateScore() === 21){
-                document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET + round.BET*1.5}$`
+                document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET*1.5}$`
                 player.updateMoney(round.BET + round.BET*1.5)
             } else {
-                document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET + round.BET}$`
+                document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET}$`
                 player.updateMoney(round.BET + round.BET)
             }
         })
