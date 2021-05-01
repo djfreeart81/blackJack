@@ -103,25 +103,41 @@ function endRound(){
     console.log(`Round ended, bank score is ${bank.calculateScore()}, player1 is ${player1.calculateScore()}, player2 is ${player2.calculateScore()}`)
     bank.score = bank.calculateScore()
     let winners = []
+    let tie = []
     players.forEach( (player) => {
         if(player.finalScore > 21) {return}
         if(player.finalScore > bank.score || bank.score>21) {
             console.log(`player ${player.name} has won`)
             winners.push(player)
         }
+        if(player.finalScore === bank.score){
+            if(player.finalScore === 21 && player.cards.length === 2 && bank.cards.length >2){
+                console.log(`player ${player.name} has won`)
+                winners.push(player)
+            } else if (player.finalScore === 21 && player.cards.length > 2 && bank.cards.length === 2){
+                console.log(`player ${player.name} has lost`)
+            } else {
+                console.log(`player ${player.name} tied`)
+                tie.push(player)
+            }
+        }
     })
     document.getElementById("info").innerHTML = ""
-    if(winners.length === 0){
+    if(winners.length === 0 && tie.length ===0){
         document.getElementById("info").innerHTML = `Sorry, the bank won!`
     } else {
-        winners.forEach( (player) => {
+        winners.forEach( player => {
             if(player.cards.length === 2 && player.calculateScore() === 21){
-                document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET*1.5}$`
+                document.getElementById("info").innerHTML += (`Congratulation ${player.name}! You won ${round.BET*1.5}$`+"\n")
                 player.updateMoney(round.BET + round.BET*1.5)
             } else {
-                document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET}$`
+                document.getElementById("info").innerHTML += (`Congratulation ${player.name}! You won ${round.BET}$`+"\n")
                 player.updateMoney(round.BET + round.BET)
             }
+        })
+        tie.forEach( player => {
+            document.getElementById("info").innerHTML += (`${player.name}, you tied with bank, get back your bet ${round.BET}$`+"\n")
+            player.updateMoney(round.BET)
         })
     }
 }
