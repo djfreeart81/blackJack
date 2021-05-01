@@ -115,8 +115,13 @@ function endRound(){
         document.getElementById("info").innerHTML = `Sorry, the bank won!`
     } else {
         winners.forEach( (player) => {
-            document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET*2}$`
-            player.updateMoney(round.BET*2)
+            if(player.cards.length === 2 && player.calculateScore() === 21){
+                document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET + round.BET*1.5}$`
+                player.updateMoney(round.BET + round.BET*1.5)
+            } else {
+                document.getElementById("info").innerHTML += `Congratulation ${player.name}! You won ${round.BET + round.BET}$`
+                player.updateMoney(round.BET + round.BET)
+            }
         })
     }
 }
