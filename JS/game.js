@@ -128,16 +128,16 @@ function endRound(){
     } else {
         winners.forEach( player => {
             if(player.cards.length === 2 && player.calculateScore() === 21){
-                document.getElementById("info").innerHTML += (`Congratulation ${player.name}! You won ${round.BET*1.5}$`+"\n")
-                player.updateMoney(round.BET + round.BET*1.5)
+                document.getElementById("info").innerHTML += (`Congratulation ${player.name}! You won ${player.bet*1.5}$`+"\n")
+                player.updateMoney(player.bet + player.bet*1.5)
             } else {
-                document.getElementById("info").innerHTML += (`Congratulation ${player.name}! You won ${round.BET}$`+"\n")
-                player.updateMoney(round.BET + round.BET)
+                document.getElementById("info").innerHTML += (`Congratulation ${player.name}! You won ${player.bet}$`+"\n")
+                player.updateMoney(player.bet + player.bet)
             }
         })
         tie.forEach( player => {
-            document.getElementById("info").innerHTML += (`${player.name}, you tied with bank, get back your bet ${round.BET}$`+"\n")
-            player.updateMoney(round.BET)
+            document.getElementById("info").innerHTML += (`${player.name}, you tied with bank, get back your bet ${player.bet}$`+"\n")
+            player.updateMoney(player.bet)
         })
     }
 }

@@ -35,11 +35,25 @@ export class Round {
                     player.betMoney(player.bet)
                 })
             }
+            if(document.getElementById(`player${player.id}-double`)) {
+                document.getElementById(`player${player.id}-double`).addEventListener("click", (event) => {
+                    event.preventDefault()
+                    event.stopImmediatePropagation()
+                    player.betMoney(player.bet)
+                    player.bet += this.BET
+                    document.getElementById(`player${player.id}-double`).disabled = true
+                    document.getElementById(`player${player.id}-done`).disabled = true
+                    document.getElementById(`player${player.id}-new-card`).disabled = true
+                    this.addNewCard(player)
+                    player.isDone = true
+                })
+            }
             if(document.getElementById(`player${player.id}-done`)) {
                 document.getElementById(`player${player.id}-done`).addEventListener("click", (event) => {
                     event.preventDefault()
                     event.stopImmediatePropagation()
                     document.getElementById(`player${player.getId()}-done`).disabled = true
+                    document.getElementById(`player${player.id}-new-card`).disabled = true
                     player.isDone = true
                 })
             }
