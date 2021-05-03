@@ -19,6 +19,7 @@ export class Round {
             event.stopImmediatePropagation()
             main()
         })
+
         this.players.forEach( (player) => {
             if(document.getElementById(`player${player.id}-new-card`)) {
                 document.getElementById(`player${player.id}-new-card`).addEventListener("click", (event) => {
@@ -53,6 +54,7 @@ export class Round {
                     event.preventDefault()
                     event.stopImmediatePropagation()
                     document.getElementById(`player${player.getId()}-done`).disabled = true
+                    document.getElementById(`player${player.getId()}-double`).disabled = true
                     document.getElementById(`player${player.id}-new-card`).disabled = true
                     player.isDone = true
                 })
@@ -73,6 +75,10 @@ export class Round {
         let elementsBet = document.getElementsByClassName("bet")
         for (let el of elementsBet) {
             el.disabled = false
+        }
+        let elementsDouble = document.getElementsByClassName("double")
+        for (let el of elementsDouble) {
+            el.disabled = true
         }
         let elementsDone = document.getElementsByClassName("done")
         for (let el of elementsDone) {

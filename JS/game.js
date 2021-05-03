@@ -49,6 +49,7 @@ function makeYourBet(){
             players.forEach( (player) => {
                 if(player.hasBet && player.isPlaying){
                     document.getElementById(`player${player.getId()}-bet`).disabled = true
+                    document.getElementById(`player${player.getId()}-double`).disabled = false
                 } else {
                     player.endRound()
                 }
@@ -64,6 +65,7 @@ function waitDone(){
     players.forEach( player => {
         player.cards.push(round.cardDeck.getCard(), round.cardDeck.getCard())
         document.getElementById(`player${player.getId()}-new-card`).disabled = false
+        document.getElementById(`player${player.id}-double`).disabled = false
         round.drawPlayerCards(player)
     })
     bank.cards.push(round.cardDeck.getCard())
