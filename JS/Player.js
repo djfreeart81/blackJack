@@ -10,6 +10,8 @@
         this.hasBet = false
         this.isDone = false
         this.finalScore = 0
+        this.status = {isPlaying: true, hasBet: false, isDone: false}
+     //TODO: replace the single parameters hasBet... by reference to this object status
     }
 
     setId(){
