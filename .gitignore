@@ -1,4 +1,5 @@
 Node/
+coverage/
 .vscode/
 *.drawio
 .babelrc
