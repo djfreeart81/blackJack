@@ -33,10 +33,6 @@ export class Game{
         return
     }
     
-    displayMessage(message){
-         document.getElementById("info").innerHTML = message
-    }
-    
     endGame(){
         // Go to menu
     }

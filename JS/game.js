@@ -3,6 +3,7 @@ import {CardDeck} from './CardDeck.js'
 import {Bank} from './Bank.js'
 import {Round} from './Round.js'
 import {Game} from './GameClass.js'
+import {Ui} from './Ui.js'
 
 const player1 = new Player('GG',1000)
 const player2 = new Player('Lenny',1000)
@@ -11,6 +12,7 @@ const CARD_DECK_SIZE = 4
 const game = new Game(players)
 let round
 let bank
+const ui = new Ui()
 
 console.log(`Player ${player1.name} created with id ${player1.id} and ${player1.money} $`)
 console.log(`Player ${player2.name} created with id ${player2.id} and ${player2.money} $`)
@@ -34,13 +36,13 @@ function makeYourBet(){
     let playersToContinue = []
     
     console.log(`make your bet launched`)
-    document.getElementById("info").innerHTML = "Make your bet within 10s or click Done!"
+    ui.newInfoMessage("Make your bet within 10s or click Done!")
     
     let timeCount = 0
     let id = setInterval( () =>{
         if(playersToContinue.length === 0 && ++timeCount >10){
             clearInterval(id)
-            document.getElementById("info").innerHTML = "No player wants to play! Game Ended!"
+            ui.newInfoMessage("No player wants to play! Game Ended!")
             game.endGame()
             return
            }
@@ -48,8 +50,8 @@ function makeYourBet(){
             clearInterval(id)
             players.forEach( (player) => {
                 if(player.hasBet && player.isPlaying){
-                    document.getElementById(`player${player.getId()}-bet`).disabled = true
-                    document.getElementById(`player${player.getId()}-double`).disabled = false
+                    ui.disableButtonById(`player${player.getId()}-bet`, true)
+                    ui.disableButtonById(`player${player.getId()}-double`, false)
                 } else {
                     player.endRound()
                 }
@@ -64,14 +66,14 @@ function waitDone(){
     console.log(`waitDone is launched`)
     players.forEach( player => {
         player.cards.push(round.cardDeck.getCard(), round.cardDeck.getCard())
-        document.getElementById(`player${player.getId()}-new-card`).disabled = false
-        document.getElementById(`player${player.id}-double`).disabled = false
+        ui.disableButtonById(`player${player.getId()}-new-card`,false)
+        ui.disableButtonById(`player${player.id}-double`,false)
         round.drawPlayerCards(player)
     })
     bank.cards.push(round.cardDeck.getCard())
     round.drawBankCards(bank)
 
-    game.displayMessage("Add card or click done within 20s!")
+    ui.newInfoMessage("Add card or click done within 20s!")
 
     let timeCount =0
     let id = setInterval( () =>{
@@ -124,21 +126,21 @@ function endRound(){
             }
         }
     })
-    game.displayMessage("")
+    ui.newInfoMessage("")
     if(winners.length === 0 && tie.length ===0){
-        game.displayMessage(`Sorry, the bank won!`)
+        ui.newInfoMessage(`Sorry, the bank won!`)
     } else {
         winners.forEach( player => {
             if(player.cards.length === 2 && player.calculateScore() === 21){
-                document.getElementById("info").innerHTML += (`Congratulation ${player.name}! You won ${player.bet*1.5}$`+"\n")
+                ui.addInfoMessage(`Congratulation ${player.name}! You won ${player.bet*1.5}$`+"\n")
                 player.updateMoney(player.bet + player.bet*1.5)
             } else {
-                document.getElementById("info").innerHTML += (`Congratulation ${player.name}! You won ${player.bet}$`+"\n")
+                ui.addInfoMessage(`Congratulation ${player.name}! You won ${player.bet}$`+"\n")
                 player.updateMoney(player.bet + player.bet)
             }
         })
         tie.forEach( player => {
-            document.getElementById("info").innerHTML += (`${player.name}, you tied with bank, get back your bet ${player.bet}$`+"\n")
+            ui.addInfoMessage(`${player.name}, you tied with bank, get back your bet ${player.bet}$`+"\n")
             player.updateMoney(player.bet)
         })
     }
