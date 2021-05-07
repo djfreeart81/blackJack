@@ -19,4 +19,13 @@ export class Ui {
    addInfoMessage(message){
         document.getElementById("info").innerHTML += message
    }
+    
+   toggleButtonById(id){
+        let el = document.getElementById(id)
+        if (el.style.display === "none") {
+            el.style.display = "block"
+        } else {
+            el.style.display = "none";
+        }
+    }
 }
