@@ -49,6 +49,13 @@ export class Round {
                     player.isDone = true
                 })
             }
+            if(document.getElementById(`player${player.id}-split`)) {
+                document.getElementById(`player${player.id}-split`).addEventListener("click", (event) => {
+                    event.preventDefault()
+                    event.stopImmediatePropagation()
+                    //TODO: implement split logic: create 2 hands: with 2 sets of buttons or same buttons but for each hand)
+                })
+            }
             if(document.getElementById(`player${player.id}-done`)) {
                 document.getElementById(`player${player.id}-done`).addEventListener("click", (event) => {
                     event.preventDefault()
@@ -78,6 +85,10 @@ export class Round {
         }
         let elementsDouble = document.getElementsByClassName("double")
         for (let el of elementsDouble) {
+            el.disabled = true
+        }
+        let elementsSplit = document.getElementsByClassName("split")
+        for (let el of elementsSplit) {
             el.disabled = true
         }
         let elementsDone = document.getElementsByClassName("done")
