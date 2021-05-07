@@ -20,12 +20,12 @@ export class Ui {
         document.getElementById("info").innerHTML += message
    }
     
-   toggleButtonById(id){
+   hideButtonById(id, bool){
         let el = document.getElementById(id)
-        if (el.style.display === "none") {
-            el.style.display = "block"
+        if (bool) {
+            el.style.display = "none"
         } else {
-            el.style.display = "none";
+            el.style.display = "block"
         }
     }
 }
