@@ -69,6 +69,10 @@ function waitDone(){
         ui.disableButtonById(`player${player.getId()}-new-card`,false)
         ui.disableButtonById(`player${player.id}-double`,false)
         round.drawPlayerCards(player)
+        // display Split button is both cards values are the same
+        if(player.cards[0].value === player.cards[1].value){
+            ui.toggleButtonById(`player${player.getId()}-split`, false)
+        }
     })
     bank.cards.push(round.cardDeck.getCard())
     round.drawBankCards(bank)
