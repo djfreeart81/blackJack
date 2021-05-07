@@ -8,6 +8,7 @@ export class Game{
     initializeGame(){
         this.players.forEach(player => this.drawPlayer(player))
         this.drawBank()
+        this.hideSplit()
         console.log('game initialized')
     }
 
@@ -31,6 +32,17 @@ export class Game{
     
     drawBank(){
         return
+    }
+    
+    hideSplit(){
+        let splitEl = document.querySelectorAll('.split')
+        for (let el of splitEl){
+            if (el.style.display === "none") {
+                el.style.display = "block"
+//               } else {
+//                 el.style.display = "none";
+              }
+        }
     }
     
     endGame(){
