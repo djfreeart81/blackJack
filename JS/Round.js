@@ -1,15 +1,13 @@
 import {Bank} from './Bank.js'
 import {CardDeck} from './CardDeck.js'
-import {Game} from './GameClass.js'
 import {main} from './game.js'
-import {Player} from './Player.js'
 
 export class Round {
-    constructor(players, cardDeckSize){
+    constructor(game, players, cardDeckSize){
         this.players = players;
         this.bank = new Bank();
         this.cardDeck = new CardDeck(cardDeckSize)
-        this.BET = 5;
+        this.BET = 5
     }
 
     initializeRound(){
@@ -19,7 +17,7 @@ export class Round {
             event.stopImmediatePropagation()
             main()
         })
-
+        console.log(JSON.stringify(this.players))
         this.players.forEach( (player) => {
             if(document.getElementById(`player${player.id}-new-card`)) {
                 document.getElementById(`player${player.id}-new-card`).addEventListener("click", (event) => {
@@ -54,7 +52,7 @@ export class Round {
                     event.preventDefault()
                     event.stopImmediatePropagation()
                     //TODO: implement split logic: create 2 hands: with 2 sets of buttons or same buttons but for each hand)
-                    ui.hideButtonById(player${player.id}-split`, true)
+                    ui.hideButtonById(`player${player.id}-split`, true)
                 })
             }
             if(document.getElementById(`player${player.id}-done`)) {

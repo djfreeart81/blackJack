@@ -1,8 +1,9 @@
-import {Player} from './Player.js'
+import {Ui} from './Ui.js'
 
 export class Game{
     constructor(players){
         this.players = players
+        this.ui = new Ui()
     }
 
     initializeGame(){
@@ -35,13 +36,9 @@ export class Game{
     }
     
     hideSplit(){
-        let splitEl = document.querySelectorAll('.split')
-        for (let el of splitEl){
-            if (el.style.display === "none") {
-                el.style.display = "block"
-//               } else {
-//                 el.style.display = "none";
-              }
+        let elements = document.getElementsByClassName('split')
+        for (let el of elements){
+            el.style.display = "none"
         }
     }
     

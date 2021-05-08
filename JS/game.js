@@ -1,9 +1,6 @@
 import {Player} from './Player.js'
-import {CardDeck} from './CardDeck.js'
-import {Bank} from './Bank.js'
 import {Round} from './Round.js'
 import {Game} from './GameClass.js'
-import {Ui} from './Ui.js'
 
 const player1 = new Player('GG',1000)
 const player2 = new Player('Lenny',1000)
@@ -12,7 +9,6 @@ const CARD_DECK_SIZE = 4
 const game = new Game(players)
 let round
 let bank
-const ui = new Ui()
 
 console.log(`Player ${player1.name} created with id ${player1.id} and ${player1.money} $`)
 console.log(`Player ${player2.name} created with id ${player2.id} and ${player2.money} $`)
@@ -21,7 +17,7 @@ game.initializeGame()
 main()
 
 function main(){
-    round = new Round([player1,player2], CARD_DECK_SIZE)
+    round = new Round(game, [player1,player2], CARD_DECK_SIZE)
     round.initializeRound()
     bank = round.bank
     players = round.players
@@ -36,13 +32,13 @@ function makeYourBet(){
     let playersToContinue = []
     
     console.log(`make your bet launched`)
-    ui.newInfoMessage("Make your bet within 10s or click Done!")
+    game.ui.newInfoMessage("Make your bet within 10s or click Done!")
     
     let timeCount = 0
     let id = setInterval( () =>{
         if(playersToContinue.length === 0 && ++timeCount >10){
             clearInterval(id)
-            ui.newInfoMessage("No player wants to play! Game Ended!")
+            game.ui.newInfoMessage("No player wants to play! Game Ended!")
             game.endGame()
             return
            }
@@ -50,8 +46,8 @@ function makeYourBet(){
             clearInterval(id)
             players.forEach( (player) => {
                 if(player.hasBet && player.isPlaying){
-                    ui.disableButtonById(`player${player.getId()}-bet`, true)
-                    ui.disableButtonById(`player${player.getId()}-double`, false)
+                    game.ui.disableButtonById(`player${player.getId()}-bet`, true)
+                    game.ui.disableButtonById(`player${player.getId()}-double`, false)
                 } else {
                     player.endRound()
                 }
@@ -66,18 +62,20 @@ function waitDone(){
     console.log(`waitDone is launched`)
     players.forEach( player => {
         player.cards.push(round.cardDeck.getCard(), round.cardDeck.getCard())
-        ui.disableButtonById(`player${player.getId()}-new-card`,false)
-        ui.disableButtonById(`player${player.id}-double`,false)
+        game.ui.disableButtonById(`player${player.getId()}-new-card`,false)
+        game.ui.disableButtonById(`player${player.getId()}-double`,false)
         round.drawPlayerCards(player)
         // display Split button is both cards values are the same
         if(player.cards[0].value === player.cards[1].value){
-            ui.toggleButtonById(`player${player.getId()}-split`, false)
+            console.log(`split available for player${player.getId()}`)
+            game.ui.hideButtonById(`player${player.getId()}-split`, false)
+            game.ui.disableButtonById(`player${player.getId()}-split`,false)
         }
     })
     bank.cards.push(round.cardDeck.getCard())
     round.drawBankCards(bank)
 
-    ui.newInfoMessage("Add card or click done within 20s!")
+    game.ui.newInfoMessage("Add card or click done within 20s!")
 
     let timeCount =0
     let id = setInterval( () =>{
@@ -130,21 +128,21 @@ function endRound(){
             }
         }
     })
-    ui.newInfoMessage("")
+    game.ui.newInfoMessage("")
     if(winners.length === 0 && tie.length ===0){
-        ui.newInfoMessage(`Sorry, the bank won!`)
+        game.ui.newInfoMessage(`Sorry, the bank won!`)
     } else {
         winners.forEach( player => {
             if(player.cards.length === 2 && player.calculateScore() === 21){
-                ui.addInfoMessage(`Congratulation ${player.name}! You won ${player.bet*1.5}$`+"\n")
+                game.ui.addInfoMessage(`Congratulation ${player.name}! You won ${player.bet*1.5}$`+"\n")
                 player.updateMoney(player.bet + player.bet*1.5)
             } else {
-                ui.addInfoMessage(`Congratulation ${player.name}! You won ${player.bet}$`+"\n")
+                game.ui.addInfoMessage(`Congratulation ${player.name}! You won ${player.bet}$`+"\n")
                 player.updateMoney(player.bet + player.bet)
             }
         })
         tie.forEach( player => {
-            ui.addInfoMessage(`${player.name}, you tied with bank, get back your bet ${player.bet}$`+"\n")
+            game.ui.addInfoMessage(`${player.name}, you tied with bank, get back your bet ${player.bet}$`+"\n")
             player.updateMoney(player.bet)
         })
     }
