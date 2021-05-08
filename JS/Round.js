@@ -7,6 +7,7 @@ export class Round {
         this.players = players;
         this.bank = new Bank();
         this.cardDeck = new CardDeck(cardDeckSize)
+        this.game = game
         this.BET = 5
     }
 
@@ -17,7 +18,7 @@ export class Round {
             event.stopImmediatePropagation()
             main()
         })
-        console.log(JSON.stringify(this.players))
+        console.log("players: "+JSON.stringify(this.players))
         this.players.forEach( (player) => {
             if(document.getElementById(`player${player.id}-new-card`)) {
                 document.getElementById(`player${player.id}-new-card`).addEventListener("click", (event) => {
@@ -32,6 +33,7 @@ export class Round {
                     event.stopImmediatePropagation()
                     player.bet = this.BET
                     player.betMoney(player.bet)
+                    player.status.hasBet = true
                 })
             }
             if(document.getElementById(`player${player.id}-double`)) {
@@ -40,11 +42,9 @@ export class Round {
                     event.stopImmediatePropagation()
                     player.betMoney(player.bet)
                     player.bet += this.BET
-                    document.getElementById(`player${player.id}-double`).disabled = true
-                    document.getElementById(`player${player.id}-done`).disabled = true
-                    document.getElementById(`player${player.id}-new-card`).disabled = true
+                    this.game.ui.disableButtonById(player,['new-card','double','done'], true)
                     this.addNewCard(player)
-                    player.isDone = true
+                    player.status.isDone = true
                 })
             }
             if(document.getElementById(`player${player.id}-split`)) {
@@ -52,23 +52,21 @@ export class Round {
                     event.preventDefault()
                     event.stopImmediatePropagation()
                     //TODO: implement split logic: create 2 hands: with 2 sets of buttons or same buttons but for each hand)
-                    ui.hideButtonById(`player${player.id}-split`, true)
+                    game.ui.hideButtonById(`player${player.id}-split`, true)
                 })
             }
             if(document.getElementById(`player${player.id}-done`)) {
                 document.getElementById(`player${player.id}-done`).addEventListener("click", (event) => {
                     event.preventDefault()
                     event.stopImmediatePropagation()
-                    document.getElementById(`player${player.getId()}-done`).disabled = true
-                    document.getElementById(`player${player.getId()}-double`).disabled = true
-                    document.getElementById(`player${player.id}-new-card`).disabled = true
-                    player.isDone = true
+                    this.game.ui.disableButtonById(player,['new-card','double','done'], true)
+                    player.status.isDone = true
                 })
             }
             // initialize players
-            player.isDone = false
-            player.hasBet = false
-            player.isPlaying = true
+            player.status.isDone = false
+            player.status.hasBet = false
+            player.status.isPlaying = true
             this.clearCards()
             document.getElementById(`player${player.getId()}-name`).innerHTML = player.getName()
             document.getElementById(`player${player.getId()}-money`).innerHTML = player.getMoney() + "$"

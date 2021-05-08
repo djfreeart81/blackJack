@@ -1,15 +1,11 @@
 export class Ui {
-    disableButtonById(id,bool){
-        document.getElementById(id).disabled = bool
-    }
-    
     /*
-    ** playerId: id of the player
-    ** buttonId: array of the button ids to update
+    ** player: player
+    ** ids: array of the button end of ids
     */
-    updateButtonById(player, buttonIds){
-        for (let buttonId in buttonIds){
-            document.getElementById(buttonId).disabled = player.buttonId
+    disableButtonById(player, ids, bool){
+        for (let id in ids){
+            document.getElementById(`player${player.getId()}-${ids[id]}`).disabled = bool
             //TODO: get a link to the player status to update the button based on the player's status.
         }
     }

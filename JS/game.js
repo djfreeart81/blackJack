@@ -23,7 +23,7 @@ function main(){
     players = round.players
     console.log(`players: ${JSON.stringify(players)}`)
     
-    if(!player1.hasBet && player1.isPlaying || !player2.hasBet && player2.isPlaying){
+    if(!player1.status.hasBet && player1.status.isPlaying || !player2.status.hasBet && player2.status.isPlaying){
         makeYourBet()
     }
 }
@@ -42,12 +42,12 @@ function makeYourBet(){
             game.endGame()
             return
            }
-        if( ((player1.hasBet || !player1.isPlaying) && (player2.hasBet || !player2.isPlaying)) || timeCount > 10 ){
+        if( ((player1.status.hasBet || !player1.status.isPlaying) && (player2.status.hasBet || !player2.status.isPlaying)) || timeCount > 10 ){
             clearInterval(id)
             players.forEach( (player) => {
-                if(player.hasBet && player.isPlaying){
-                    game.ui.disableButtonById(`player${player.getId()}-bet`, true)
-                    game.ui.disableButtonById(`player${player.getId()}-double`, false)
+                if(player.status.hasBet && player.status.isPlaying){
+                    game.ui.disableButtonById(player,['bet'], true)
+                    game.ui.disableButtonById(player,['double'], false)
                 } else {
                     player.endRound()
                 }
@@ -62,14 +62,13 @@ function waitDone(){
     console.log(`waitDone is launched`)
     players.forEach( player => {
         player.cards.push(round.cardDeck.getCard(), round.cardDeck.getCard())
-        game.ui.disableButtonById(`player${player.getId()}-new-card`,false)
-        game.ui.disableButtonById(`player${player.getId()}-double`,false)
+        game.ui.disableButtonById(player,['new-card','double'], false)
         round.drawPlayerCards(player)
         // display Split button is both cards values are the same
         if(player.cards[0].value === player.cards[1].value){
             console.log(`split available for player${player.getId()}`)
             game.ui.hideButtonById(`player${player.getId()}-split`, false)
-            game.ui.disableButtonById(`player${player.getId()}-split`,false)
+            game.ui.disableButtonById(player,['split'], false)
         }
     })
     bank.cards.push(round.cardDeck.getCard())
@@ -82,10 +81,10 @@ function waitDone(){
         if(++timeCount > 20) {
             clearInterval(id)
             for (let player of players){
-                player.isDone = true
+                player.status.isDone = true
             }
         }
-        if(player1.isDone && player2.isDone){
+        if(player1.status.isDone && player2.status.isDone){
             clearInterval(id)
             for (let player of players){player.finalScore = player.calculateScore()}
             bankPlay()
