@@ -19,9 +19,9 @@ export class Round {
       main();
     });
     this.players.forEach((player) => {
-      if (document.getElementById(`player${player.id}-new-card`)) {
+      if (document.getElementById(`player${player.id}-hit`)) {
         document
-          .getElementById(`player${player.id}-new-card`)
+          .getElementById(`player${player.id}-hit`)
           .addEventListener("click", (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
@@ -50,7 +50,7 @@ export class Round {
             player.bet += this.BET;
             this.game.ui.disableButtonById(
               player,
-              ["new-card", "double", "done"],
+              ["hit", "double", "done"],
               true
             );
             this.addNewCard(player);
@@ -75,7 +75,7 @@ export class Round {
             event.stopImmediatePropagation();
             this.game.ui.disableButtonById(
               player,
-              ["new-card", "double", "done", "bet"],
+              ["hit", "double", "done", "bet"],
               true
             );
             player.status.isDone = true;
@@ -93,7 +93,7 @@ export class Round {
         player.getMoney() + "$";
       player.setPlayerBorderRed(false);
     });
-    let elementsNewCard = document.getElementsByClassName("new-card");
+    let elementsNewCard = document.getElementsByClassName("hit");
     for (let el of elementsNewCard) {
       el.disabled = true;
     }
@@ -168,7 +168,7 @@ export class Round {
     player.status.isDone = true;
     this.game.ui.disableButtonById(
       player,
-      ["done", "bet", "new-card", "double"],
+      ["done", "bet", "hit", "double"],
       true
     );
     this.setPlayerBorderRed(true);

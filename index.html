@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" href="data:,">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:," />
 
-  <title>BlackJack Game</title>
-  <meta name="description" content="A basic BlackJack Game">
-  <meta name="author" content="GG">
+    <title>BlackJack Game</title>
+    <meta name="description" content="A basic BlackJack Game" />
+    <meta name="author" content="GG" />
 
-  <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div>
       <button class="button-menu" id="new-round">New Round</button>
-      <a href="https://fr.wikipedia.org/wiki/Blackjack_(jeu)#Règles" target="_blank" class="button-menu">Rules</a>
+      <a
+        href="https://fr.wikipedia.org/wiki/Blackjack_(jeu)#Règles"
+        target="_blank"
+        class="button-menu"
+        >Rules</a
+      >
     </div>
     <container>
       <div class="bank" id="bank">
@@ -26,13 +30,11 @@
         <div id="bank-cards"></div>
       </div>
     </container>
-    
+
     <container>
-      <div class="player player1" id="player1">
-        
-      </div>
+      <div class="player player1" id="player1"></div>
       <div class="player1-button-box" id="player1-button-box">
-        <button class="button-player new-card" id="player1-new-card">Hit</button>
+        <button class="button-player hit" id="player1-hit">Hit</button>
         <button class="button-player bet" id="player1-bet">Bet</button>
         <button class="button-player double" id="player1-double">Double</button>
         <button class="button-player split" id="player1-split">Split</button>
@@ -43,11 +45,9 @@
     </container>
 
     <container>
-      <div class="player player2" id="player2">
-    
-      </div>
-        <div class="player2-button-box" id="player2-button-box">
-        <button class="button-player new-card" id="player2-new-card">Hit</button>
+      <div class="player player2" id="player2"></div>
+      <div class="player2-button-box" id="player2-button-box">
+        <button class="button-player hit" id="player2-hit">Hit</button>
         <button class="button-player bet" id="player2-bet">Bet</button>
         <button class="button-player double" id="player2-double">Double</button>
         <button class="button-player split" id="player2-split">Split</button>
@@ -59,7 +59,6 @@
 
     <div class="annonce" id="info"></div>
 
-
     <script type="module" src="./JS/game.js"></script>
-</body>
+  </body>
 </html>

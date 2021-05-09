@@ -43,6 +43,12 @@ export class Game {
   }
 
   endGame() {
-    // Go to menu
+    this.players.forEach((player) => {
+      this.ui.disableButtonById(
+        player,
+        ["bet", "double", "split", "hit"],
+        true
+      );
+    });
   }
 }

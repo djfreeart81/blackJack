@@ -67,7 +67,7 @@ function waitDone(players) {
   //Distribute Player cards & activate buttons
   players.forEach((player) => {
     player.cards.push(round.cardDeck.getCard(), round.cardDeck.getCard());
-    game.ui.disableButtonById(player, ["new-card", "double"], false);
+    game.ui.disableButtonById(player, ["hit", "double"], false);
     round.drawPlayerCards(player);
 
     // display Split button is both cards values are the same

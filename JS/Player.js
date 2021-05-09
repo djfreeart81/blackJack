@@ -48,7 +48,7 @@ export class Player {
   }
 
   /**
-   * Define the border parameters and manage new-card button status
+   * Define the border parameters and manage hit button status
    * @param {green,red} color
    */
   setPlayerBorderRed(bool) {
@@ -64,16 +64,9 @@ export class Player {
     document.getElementById(
       `player${this.getId()}-button-box`
     ).style.borderColor = colors[bool].border;
-    document.getElementById(`player${this.getId()}-new-card`).disabled = bool;
+    document.getElementById(`player${this.getId()}-hit`).disabled = bool;
   }
-  endRound() {
-    this.isPlaying = false;
-    this.isDone = true;
-    document.getElementById(`player${this.getId()}-done`).disabled = true;
-    document.getElementById(`player${this.getId()}-bet`).disabled = true;
-    document.getElementById(`player${this.getId()}-new-card`).disabled = true;
-    this.setPlayerBorderRed(true);
-  }
+
   calculateScore() {
     let cardValues = this.cards.map(({ value }) => value).sort((a, b) => b - a);
     let numberOfOnes = cardValues.filter((number) => number === 1).length;
