@@ -6,13 +6,8 @@
         this.setId()
         this.cards=[]
         this.bet = 0
-        this.isPlaying = true
-        this.hasBet = false
-        this.isDone = false
         this.finalScore = 0
         this.status = {isPlaying: true, hasBet: false, isDone: false}
-     //TODO: replace the single parameters hasBet... by reference to this object status
-     //TODO: the key should be the button id to have the link to the button, or create another object for the buttons
     }
 
     setId(){

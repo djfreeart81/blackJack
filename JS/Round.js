@@ -34,6 +34,7 @@ export class Round {
                     player.bet = this.BET
                     player.betMoney(player.bet)
                     player.status.hasBet = true
+                    this.game.ui.disableButtonById(player,['bet'], true)
                 })
             }
             if(document.getElementById(`player${player.id}-double`)) {

@@ -4,9 +4,8 @@ import {Game} from './GameClass.js'
 
 const player1 = new Player('GG',1000)
 const player2 = new Player('Lenny',1000)
-let players = [player1, player2]
 const CARD_DECK_SIZE = 4
-const game = new Game(players)
+const game = new Game([player1, player2])
 let round
 let bank
 
@@ -17,22 +16,20 @@ game.initializeGame()
 main()
 
 function main(){
-    round = new Round(game, [player1,player2], CARD_DECK_SIZE)
+    let roundPlayers = [...game.players]
+    round = new Round(game, roundPlayers, CARD_DECK_SIZE)
     round.initializeRound()
     bank = round.bank
-    players = round.players
-    console.log(`players: ${JSON.stringify(players)}`)
-    
-    if(!player1.status.hasBet && player1.status.isPlaying || !player2.status.hasBet && player2.status.isPlaying){
-        makeYourBet()
-    }
+    console.log(`players: ${JSON.stringify(round.players)}`)
+    let playersArray = [...round.players]
+    makeYourBet(playersArray)
 }
 
-function makeYourBet(){
-    let playersToContinue = []
-    
+function makeYourBet(playersToBet){
     console.log(`make your bet launched`)
     game.ui.newInfoMessage("Make your bet within 10s or click Done!")
+    let undecidedPlayers = playersToBet
+    let playersToContinue = []
     
     let timeCount = 0
     let id = setInterval( () =>{
@@ -42,9 +39,11 @@ function makeYourBet(){
             game.endGame()
             return
            }
-        if( ((player1.status.hasBet || !player1.status.isPlaying) && (player2.status.hasBet || !player2.status.isPlaying)) || timeCount > 10 ){
+           ({undecidedPlayers,playersToContinue} = checkBets(undecidedPlayers,playersToContinue))
+
+           if(undecidedPlayers.length === 0){
             clearInterval(id)
-            players.forEach( (player) => {
+            playersToBet.forEach( (player) => {
                 if(player.status.hasBet && player.status.isPlaying){
                     game.ui.disableButtonById(player,['bet'], true)
                     game.ui.disableButtonById(player,['double'], false)
@@ -52,18 +51,19 @@ function makeYourBet(){
                     player.endRound()
                 }
             })
-            
-            waitDone()
+            console.log(`players to continue: ${JSON.stringify(playersToContinue)}`)
+            waitDone(playersToContinue)
         }
     },1000)
 }
 
-function waitDone(){
+function waitDone(players){
     console.log(`waitDone is launched`)
     players.forEach( player => {
         player.cards.push(round.cardDeck.getCard(), round.cardDeck.getCard())
         game.ui.disableButtonById(player,['new-card','double'], false)
         round.drawPlayerCards(player)
+
         // display Split button is both cards values are the same
         if(player.cards[0].value === player.cards[1].value){
             console.log(`split available for player${player.getId()}`)
@@ -71,6 +71,7 @@ function waitDone(){
             game.ui.disableButtonById(player,['split'], false)
         }
     })
+
     bank.cards.push(round.cardDeck.getCard())
     round.drawBankCards(bank)
 
@@ -94,7 +95,7 @@ function waitDone(){
 
 function bankPlay(){
     if(bank.calculateScore()>16){
-        endRound()
+        endRound(game.players)
     } else {
         let newCard = round.cardDeck.getCard()
         bank.cards.push(newCard)
@@ -104,9 +105,11 @@ function bankPlay(){
     }
 }
 
-function endRound(){
-    console.log(`Round ended, bank score is ${bank.calculateScore()}, player1 is ${player1.calculateScore()}, player2 is ${player2.calculateScore()}`)
+function endRound(players){
+    console.log(`Round ended, bank score is ${bank.calculateScore()}, player1 is ${player1.finalScore}, player2 is ${player2.finalScore}`)
+    
     bank.score = bank.calculateScore()
+    
     let winners = []
     let tie = []
     players.forEach( (player) => {
@@ -147,4 +150,19 @@ function endRound(){
     }
 }
 
-export {main}
+/**
+ * Remove players that already have bet or are not playing
+ * @param {array of players} players
+ */
+function checkBets(undecidedPlayers,playersToContinue){
+    undecidedPlayers.forEach((player)=> {
+        if(player.status.hasBet){
+            playersToContinue.push(undecidedPlayers.splice(undecidedPlayers.indexOf(player),1)[0])
+        } else if (!player.status.isPlaying){
+            undecidedPlayers.splice(undecidedPlayers.indexOf(player),1)
+        }
+    })
+    return {undecidedPlayers,playersToContinue}
+}
+
+export {main, endRound, checkBets}
