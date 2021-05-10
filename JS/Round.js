@@ -121,9 +121,8 @@ export class Round {
       document.getElementById(
         `player${player.getId()}-cards`
       ).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "");
-      document.getElementById(
-        `player${player.getId()}-score`
-      ).innerHTML = player.calculateScore();
+      document.getElementById(`player${player.getId()}-score`).innerHTML =
+        "score: " + player.calculateScore();
     }
   }
 
@@ -132,9 +131,8 @@ export class Round {
       (acc, i) => acc + i.image,
       ""
     );
-    document.getElementById(
-      `bank-score`
-    ).innerHTML = this.bank.calculateScore();
+    document.getElementById(`bank-score`).innerHTML =
+      "score: " + this.bank.calculateScore();
   }
 
   addNewCard(player) {

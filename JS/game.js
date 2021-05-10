@@ -36,6 +36,7 @@ function makeYourBet(playersToBet) {
   let playersToContinue = [];
 
   let timeCount = 0;
+  game.ui.hideClass("progress", false);
   let id = setInterval(() => {
     if (playersToContinue.length === 0 && ++timeCount > 10) {
       clearInterval(id);
@@ -43,6 +44,8 @@ function makeYourBet(playersToBet) {
       game.endGame();
       return;
     }
+    game.ui.updateProgressBar(10);
+
     ({ undecidedPlayers, playersToContinue } = checkBets(
       undecidedPlayers,
       playersToContinue

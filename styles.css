@@ -1,125 +1,110 @@
 body {
-    background-color: rgb(105, 133, 78);
-}
-
-.bank {
-    background-color: darkgray;
-    width: 200px;
-    height: 100px;
-    border: 5px solid rgb(107, 151, 107);
-    padding: 10px;
-    margin: 10px;
-    color: black;
-    position: fixed;
-    top: 5%;
-    left: 40%;
-    text-align: center;
-    font-size: xx-large;
+  background-color: rgb(105, 133, 78);
 }
 
 .player {
-    background-color: darkgray;
-    width: 200px;
-    border: 5px solid green;
-    padding: 10px;
-    margin: 10px;
-    color: black;
-    position: fixed;
-    text-align: center;
-    font-size: xx-large;
+  background-color: darkgray;
+  width: 200px;
+  border: 5px solid green;
+  padding: 10px;
+  margin: 10px;
+  color: black;
+  position: fixed;
+  text-align: center;
+  font-size: xx-large;
 }
 
 .player1 {
-    top: 200px;
-    left: 50px;
+  top: 200px;
+  left: 50px;
 }
 
 .player2 {
-    top: 200px;
-    right: 200px;
+  top: 200px;
+  right: 200px;
 }
 
 .player1-button-box {
-    background-color: darkgray;
-    width: 50px;
-    height: 100px;
-    left: 260px;
-    top: 200px;
-    border: 5px solid green;
-    padding: 2px;
-    margin: 10px;
-    color: black;
-    position: absolute;
+  background-color: darkgray;
+  width: 50px;
+  height: 100px;
+  left: 260px;
+  top: 200px;
+  border: 5px solid green;
+  padding: 2px;
+  margin: 10px;
+  color: black;
+  position: absolute;
 }
 
 .player2-button-box {
-    background-color: darkgray;
-    width: 50px;
-    height: 100px;
-    right: 150px;
-    top: 200px;
-    border: 5px solid green;
-    padding: 2px;
-    margin: 10px;
-    color: black;
-    position: absolute;
+  background-color: darkgray;
+  width: 50px;
+  height: 100px;
+  right: 150px;
+  top: 200px;
+  border: 5px solid green;
+  padding: 2px;
+  margin: 10px;
+  color: black;
+  position: absolute;
 }
 
 .button-player {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
+  background-color: #4caf50; /* Green */
+  border: 1px solid green;
+  color: white;
+  padding: 1px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  width: 50px;
+  margin: 1px;
+  display: block;
 }
 
-.button-player:disabled{
-    background-color: grey; /* Green */
-    border: 1px solid grey;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 50px;
-    margin: 1px;
-    display: block;
+.button-player:disabled {
+  background-color: grey; /* Green */
+  border: 1px solid grey;
+  color: white;
+  padding: 1px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  width: 50px;
+  margin: 1px;
+  display: block;
 }
 
-.button-menu{
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 1px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    cursor: pointer;
-    width: 100px;
-    height: 50px;
-    margin: 1px;
-    top: 5%;
-    left: 15%;
+.button-menu {
+  background-color: #4caf50; /* Green */
+  border: 1px solid green;
+  color: white;
+  padding: 1px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  margin: 1px;
+  top: 5%;
+  left: 15%;
 }
 
 .annonce {
-    background-color: rgb(152, 181, 219);
-    width: 200px;
-    height: 100px;
-    border: 5px solid rgb(107, 151, 107);
-    padding: 10px;
-    margin: 10px;
-    color: black;
-    position: fixed;
-    top: 50%;
-    left: 40%;
-    text-align: center;
-    font-size: large;
+  background-color: rgb(152, 181, 219);
+  width: 200px;
+  height: 100px;
+  border: 5px solid rgb(107, 151, 107);
+  padding: 10px;
+  margin: 10px;
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 40%;
+  text-align: center;
+  font-size: large;
 }

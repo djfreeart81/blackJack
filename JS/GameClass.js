@@ -9,22 +9,23 @@ export class Game {
   initializeGame() {
     this.players.forEach((player) => this.drawPlayer(player));
     this.drawBank();
-    this.hideSplit();
+    this.ui.hideClass("split", true);
+    this.ui.hideClass("progress", true);
     console.log("game initialized");
   }
 
   drawPlayer(player) {
     let $player = document.getElementById("player" + player.id);
-    let $playerName = document.createElement("div");
-    $playerName.id = `player${player.id}-name`;
-    $playerName.innerHTML = player.name;
-    $player.appendChild($playerName);
-    console.log(JSON.stringify($playerName));
+    // let $playerName = document.createElement("div");
+    // $playerName.id = `player${player.id}-name`;
+    // $playerName.innerHTML = player.name;
+    // $player.appendChild($playerName);
+    // console.log(JSON.stringify($playerName));
 
-    let $playerMoney = document.createElement("div");
-    $playerMoney.id = `player${player.id}-money`;
-    $playerMoney.innerHTML = player.money + " $";
-    $player.appendChild($playerMoney);
+    // let $playerMoney = document.createElement("div");
+    // $playerMoney.id = `player${player.id}-money`;
+    // $playerMoney.innerHTML = player.money + " $";
+    // $player.appendChild($playerMoney);
 
     let $playerCards = document.createElement("div");
     $playerCards.id = `player${player.id}-cards`;
@@ -33,13 +34,6 @@ export class Game {
 
   drawBank() {
     return;
-  }
-
-  hideSplit() {
-    let elements = document.getElementsByClassName("split");
-    for (let el of elements) {
-      el.style.display = "none";
-    }
   }
 
   endGame() {
