@@ -59,6 +59,8 @@ function makeYourBet(playersToBet) {
           round.endRoundPlayer(player);
         }
       });
+      game.ui.hideClass("progress", true);
+      game.ui.progressBarObj.value = 0;
       waitDone(playersToContinue);
     }
   }, 1000);
@@ -89,6 +91,7 @@ function waitDone(players) {
 
   //Wait for players to play & launch BankPlay when all players are done or 20s past
   let timeCount = 0;
+  game.ui.hideClass("progress", false);
   let playersNotDone = [...players];
   let id = setInterval(() => {
     if (++timeCount > 20) {
@@ -97,12 +100,14 @@ function waitDone(players) {
         player.status.isDone = true;
       }
     }
+    game.ui.updateProgressBar(5);
     playersNotDone = checkPlayerDone(playersNotDone);
     if (playersNotDone.length === 0) {
       clearInterval(id);
       for (let player of players) {
         player.finalScore = player.calculateScore();
       }
+      game.ui.hideClass("progress", true);
       bankPlay();
     }
   }, 1000);
