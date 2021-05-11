@@ -61,9 +61,6 @@ export class Player {
       colors[bool].border;
     document.getElementById(`player${this.getId()}`).style.backgroundColor =
       colors[bool].background;
-    // document.getElementById(
-    //   `player${this.getId()}-button-box`
-    // ).style.borderColor = colors[bool].border;
     document.getElementById(`player${this.getId()}-hit`).disabled = bool;
   }
 
