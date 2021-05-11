@@ -11,9 +11,17 @@ export class Ui {
       document.getElementById(
         `player${player.getId()}-${ids[id]}`
       ).disabled = bool;
-      //TODO: get a link to the player status to update the button based on the player's status.
     }
   }
+
+  disableButtonByClass(classId, bool) {
+    let elements = document.querySelectorAll(classId);
+    elements.forEach((el) => {
+      console.log(el);
+      el.disabled = bool;
+    });
+  }
+
   newInfoMessage(message) {
     document.getElementById("info").innerHTML = message;
   }
@@ -36,6 +44,8 @@ export class Ui {
       el.style.display = param;
     }
   }
+
+  //TODO: change %progress into seconds remaining
   updateProgressBar(percentage) {
     let $progressBar = document.getElementById("progress-bar");
     this.progressBarObj.value = Math.min(
@@ -45,6 +55,5 @@ export class Ui {
     $progressBar.style.width = this.progressBarObj.value + "%";
     $progressBar.valuenow = this.progressBarObj.value;
     $progressBar.innerText = this.progressBarObj.value + "%";
-    console.log(`progressbar updated to ${$progressBar.style.width}`);
   }
 }

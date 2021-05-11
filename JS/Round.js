@@ -90,26 +90,26 @@ export class Round {
         `player${player.getId()}-name`
       ).innerHTML = player.getName();
       document.getElementById(`player${player.getId()}-money`).innerHTML =
-        player.getMoney() + "$";
+        player.getMoney() + " $";
       player.setPlayerBorderRed(false);
     });
-    let elementsNewCard = document.getElementsByClassName("hit");
+    let elementsNewCard = document.getElementsByClassName("BJ-btn-hit");
     for (let el of elementsNewCard) {
       el.disabled = true;
     }
-    let elementsBet = document.getElementsByClassName("bet");
+    let elementsBet = document.getElementsByClassName("BJ-btn-bet");
     for (let el of elementsBet) {
       el.disabled = false;
     }
-    let elementsDouble = document.getElementsByClassName("double");
+    let elementsDouble = document.getElementsByClassName("BJ-btn-double");
     for (let el of elementsDouble) {
       el.disabled = true;
     }
-    let elementsSplit = document.getElementsByClassName("split");
+    let elementsSplit = document.getElementsByClassName("BJ-btn-split");
     for (let el of elementsSplit) {
       el.disabled = true;
     }
-    let elementsDone = document.getElementsByClassName("done");
+    let elementsDone = document.getElementsByClassName("BJ-btn-done");
     for (let el of elementsDone) {
       el.disabled = false;
     }

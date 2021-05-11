@@ -108,6 +108,7 @@ function waitDone(players) {
         player.finalScore = player.calculateScore();
       }
       game.ui.hideClass("progress", true);
+      game.ui.progressBarObj.value = 0;
       bankPlay();
     }
   }, 1000);

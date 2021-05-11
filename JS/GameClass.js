@@ -7,10 +7,14 @@ export class Game {
   }
 
   initializeGame() {
-    this.players.forEach((player) => this.drawPlayer(player));
+    this.players.forEach((player) => {
+      this.drawPlayer(player);
+      this.ui.disableButtonById(player, ["double", "split", "hit"], true);
+    });
     this.drawBank();
     this.ui.hideClass("split", true);
     this.ui.hideClass("progress", true);
+
     console.log("game initialized");
   }
 
