@@ -144,7 +144,7 @@ export class Round {
     );
     if (player.getCardValue() > 21) {
       this.players.pop(player);
-      player.endRound();
+      this.endRoundPlayer(player);
     }
   }
 
