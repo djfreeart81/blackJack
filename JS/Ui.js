@@ -37,6 +37,7 @@ export class Ui {
       el.style.display = "block";
     }
   }
+
   hideClass(classId, bool) {
     let param = bool ? "none" : "block";
     let elements = document.getElementsByClassName(classId);
