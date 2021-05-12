@@ -18,6 +18,10 @@ export class Player {
     return this.name;
   }
 
+  setName(name) {
+    this.name = name;
+  }
+
   getMoney() {
     return this.money;
   }

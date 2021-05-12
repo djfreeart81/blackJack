@@ -1,4 +1,5 @@
 import { Ui } from "./Ui.js";
+import { main } from "./game.js";
 
 export class Game {
   constructor(players) {
@@ -7,6 +8,19 @@ export class Game {
   }
 
   initializeGame() {
+    this.ui.addInfoMessage("\nClick on New Game to start");
+    //add listener to modal inside button new game
+    let btnOk = document.getElementById("modal-new-game-ok");
+    btnOk.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      this.players[0].setName(
+        document.getElementById("playerNameInput1").value
+      );
+      this.players[1].name = document.getElementById("playerNameInput2").value;
+      main();
+    });
+
     this.players.forEach((player) => {
       this.drawPlayer(player);
       this.ui.disableButtonById(player, ["double", "split", "hit"], true);
@@ -15,7 +29,9 @@ export class Game {
     this.ui.hideClass("split", true);
     this.ui.hideClass("progress", true);
 
-    console.log("game initialized");
+    console.log(
+      `game initialized with players ${JSON.stringify(this.players)}`
+    );
   }
 
   drawPlayer(player) {
@@ -44,7 +60,7 @@ export class Game {
     this.players.forEach((player) => {
       this.ui.disableButtonById(
         player,
-        ["bet", "double", "split", "hit"],
+        ["bet", "double", "split", "hit", "done"],
         true
       );
     });

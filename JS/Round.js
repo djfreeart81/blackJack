@@ -86,9 +86,8 @@ export class Round {
       player.status.hasBet = false;
       player.status.isPlaying = true;
       this.clearCards();
-      document.getElementById(
-        `player${player.getId()}-name`
-      ).innerHTML = player.getName();
+      document.getElementById(`player${player.getId()}-name`).innerHTML =
+        player.getName();
       document.getElementById(`player${player.getId()}-money`).innerHTML =
         player.getMoney() + " $";
       player.setPlayerBorderRed(false);
@@ -118,9 +117,8 @@ export class Round {
 
   drawPlayerCards(player) {
     if (document.getElementById(`player${player.getId()}-cards`)) {
-      document.getElementById(
-        `player${player.getId()}-cards`
-      ).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "");
+      document.getElementById(`player${player.getId()}-cards`).innerHTML =
+        player.cards.reduce((acc, i) => acc + i.image, "");
       document.getElementById(`player${player.getId()}-score`).innerHTML =
         "score: " + player.calculateScore();
     }
@@ -169,6 +167,6 @@ export class Round {
       ["done", "bet", "hit", "double"],
       true
     );
-    this.setPlayerBorderRed(true);
+    player.setPlayerBorderRed(true);
   }
 }

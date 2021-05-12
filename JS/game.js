@@ -17,14 +17,14 @@ console.log(
 );
 
 game.initializeGame();
-main();
+// main();
 
 function main() {
   let roundPlayers = [...game.players];
   round = new Round(game, roundPlayers, CARD_DECK_SIZE);
   round.initializeRound();
   bank = round.bank;
-  console.log(`players: ${JSON.stringify(round.players)}`);
+  console.log(`players of round: ${JSON.stringify(round.players)}`);
   let playersArray = [...round.players];
   makeYourBet(playersArray);
 }
