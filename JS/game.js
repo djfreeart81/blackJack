@@ -17,7 +17,6 @@ console.log(
 );
 
 game.initializeGame();
-// main();
 
 function main() {
   let roundPlayers = [...game.players];
@@ -174,12 +173,12 @@ function endRound(players) {
         game.ui.addInfoMessage(
           `Congratulation ${player.name}! You won ${player.bet * 1.5}$` + "\n"
         );
-        player.updateMoney(player.bet + player.bet * 1.5);
+        player.updateMoney(+player.bet + player.bet * 1.5);
       } else {
         game.ui.addInfoMessage(
           `Congratulation ${player.name}! You won ${player.bet}$` + "\n"
         );
-        player.updateMoney(player.bet + player.bet);
+        player.updateMoney(+player.bet + player.bet);
       }
     });
     tie.forEach((player) => {

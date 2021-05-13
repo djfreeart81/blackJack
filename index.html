@@ -296,7 +296,9 @@
               max="100"
               step="5"
               id="betRange"
+              onchange="updateTextInput(this.value);"
             />
+            <input type="text" id="rangeTextInput" value="" />
           </div>
           <div class="modal-footer">
             <button
@@ -325,5 +327,10 @@
       crossorigin="anonymous"
     ></script>
     <script type="module" src="./JS/game.js"></script>
+    <script>
+      function updateTextInput(val) {
+        document.getElementById("rangeTextInput").value = val;
+      }
+    </script>
   </body>
 </html>

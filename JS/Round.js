@@ -8,7 +8,7 @@ export class Round {
     this.bank = new Bank();
     this.cardDeck = new CardDeck(cardDeckSize);
     this.game = game;
-    this.BET = 5;
+    this.BET = 5; // default bet
   }
 
   initializeRound() {
@@ -34,7 +34,7 @@ export class Round {
           .addEventListener("click", (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
-            player.bet = this.BET;
+            player.bet = player.bet || this.BET;
             player.betMoney(player.bet);
             player.status.hasBet = true;
             this.game.ui.disableButtonById(player, ["bet"], true);
@@ -47,7 +47,7 @@ export class Round {
             event.preventDefault();
             event.stopImmediatePropagation();
             player.betMoney(player.bet);
-            player.bet += this.BET;
+            player.bet += player.bet;
             this.game.ui.disableButtonById(
               player,
               ["hit", "double", "done"],

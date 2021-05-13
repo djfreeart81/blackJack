@@ -42,7 +42,7 @@ export class Player {
     this.bet = amount;
     this.updateMoney(-amount);
     this.status.hasBet = true;
-    console.log(`player ${this.name} bet ${this.bet}`);
+    console.log(`player ${this.name} has bet ${this.bet}`);
   }
 
   updateMoney(amount) {

@@ -18,6 +18,9 @@ export class Game {
         document.getElementById("playerNameInput1").value
       );
       this.players[1].name = document.getElementById("playerNameInput2").value;
+      this.players.forEach(
+        (player) => (player.bet = +document.getElementById("betRange").value)
+      );
       main();
     });
 
