@@ -14,10 +14,12 @@ export class Game {
     btnOk.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      this.players[0].setName(
-        document.getElementById("playerNameInput1").value
-      );
-      this.players[1].name = document.getElementById("playerNameInput2").value;
+      let name1 = document.getElementById("playerNameInput1").value;
+      let name2 = document.getElementById("playerNameInput2").value;
+      this.players[0].setName(name1);
+      this.players[1].setName(name2);
+      localStorage.setItem("player1",name1)
+      localStorage.setItem("player2",name2)
       this.players.forEach(
         (player) => (player.bet = +document.getElementById("betRange").value)
       );
