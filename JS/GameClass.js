@@ -9,6 +9,8 @@ export class Game {
 
   initializeGame() {
     this.ui.addInfoMessage("\nClick on New Game to start");
+    document.getElementById("playerNameInput1").textContent = localStorage.getItem("player1") || "Input your name"
+    document.getElementById("playerNameInput2").textContent = localStorage.getItem("player2") || "Input your name"
     //add listener to modal inside button new game
     let btnOk = document.getElementById("modal-new-game-ok");
     btnOk.addEventListener("click", (e) => {
