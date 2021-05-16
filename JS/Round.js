@@ -26,6 +26,7 @@ export class Round {
             event.preventDefault();
             event.stopImmediatePropagation();
             this.addNewCard(player);
+            this.game.ui.disableButtonById(player, ["double"], true);
           });
       }
       if (document.getElementById(`player${player.id}-bet`)) {
@@ -64,7 +65,7 @@ export class Round {
             event.preventDefault();
             event.stopImmediatePropagation();
             //TODO: implement split logic: create 2 hands: with 2 sets of buttons or same buttons but for each hand)
-            game.ui.hideButtonById(`player${player.id}-split`, true);
+            this.game.ui.hideButtonById(`player${player.id}-split`, true);
           });
       }
       if (document.getElementById(`player${player.id}-done`)) {

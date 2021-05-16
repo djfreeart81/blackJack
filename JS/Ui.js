@@ -8,9 +8,8 @@ export class Ui {
    */
   disableButtonById(player, ids, bool) {
     for (let id in ids) {
-      document.getElementById(
-        `player${player.getId()}-${ids[id]}`
-      ).disabled = bool;
+      document.getElementById(`player${player.getId()}-${ids[id]}`).disabled =
+        bool;
     }
   }
 
@@ -57,4 +56,10 @@ export class Ui {
     $progressBar.valuenow = this.progressBarObj.value;
     $progressBar.innerText = this.progressBarObj.value + "%";
   }
+
+  drawSplit(player) {
+    //TODO: implement
+  }
+
+  drawPlayer(player) {}
 }
