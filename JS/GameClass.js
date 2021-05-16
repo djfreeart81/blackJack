@@ -9,8 +9,7 @@ export class Game {
   }
 
   initializeGame() {
-    this.ui.addInfoMessage("\nClick on New Game to start");
-    this.ui.drawPlayer3();
+    this.ui.addInfoMessage("Click on New Game to start.");
     document.getElementById("playerNameInput1").textContent =
       localStorage.getItem("player1") || "Input your name";
     document.getElementById("playerNameInput2").textContent =
@@ -32,15 +31,12 @@ export class Game {
       localStorage.setItem("player1", name1);
       localStorage.setItem("player2", name2);
       localStorage.setItem("player3", name3);
-      this.players.forEach(
-        (player) => (player.bet = +document.getElementById("betRange").value)
-      );
       this.bet = +document.getElementById("betRange").value;
       main();
     });
 
     this.players.forEach((player) => {
-      this.drawPlayer(player);
+      this.ui.drawPlayer(player);
       this.ui.disableButtonById(player, ["double", "split", "hit"], true);
     });
     this.drawBank();
@@ -50,24 +46,6 @@ export class Game {
     console.log(
       `game initialized with players ${JSON.stringify(this.players)}`
     );
-  }
-
-  drawPlayer(player) {
-    let $player = document.getElementById("player" + player.id);
-    // let $playerName = document.createElement("div");
-    // $playerName.id = `player${player.id}-name`;
-    // $playerName.innerHTML = player.name;
-    // $player.appendChild($playerName);
-    // console.log(JSON.stringify($playerName));
-
-    // let $playerMoney = document.createElement("div");
-    // $playerMoney.id = `player${player.id}-money`;
-    // $playerMoney.innerHTML = player.money + " $";
-    // $player.appendChild($playerMoney);
-
-    let $playerCards = document.createElement("div");
-    $playerCards.id = `player${player.id}-cards`;
-    $player.appendChild($playerCards);
   }
 
   drawBank() {

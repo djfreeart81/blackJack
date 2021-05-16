@@ -22,10 +22,15 @@ export class Ui {
   }
 
   newInfoMessage(message) {
-    document.getElementById("info").innerHTML = message;
+    let info = document.getElementById("info");
+    info.innerHTML = "";
+    this.addInfoMessage(message);
   }
   addInfoMessage(message) {
-    document.getElementById("info").innerHTML += message;
+    let info = document.getElementById("info");
+    let newPar = document.createElement("p");
+    newPar.innerText = message;
+    info.appendChild(newPar);
   }
 
   hideButtonById(id, bool) {
@@ -73,24 +78,25 @@ export class Ui {
     //TODO: implement
   }
 
-  drawPlayer(player) {}
-
-  drawPlayer3() {
-    let div = document.getElementById("player3");
+  drawPlayer(player) {
+    let playerWithId = `player${player.getId()}`;
+    let div = document.createElement("div");
+    div.className = "col-sm-5";
+    div.id = playerWithId;
     div.innerHTML = `<div
 class="card text-center border-secondary mb-3"
-id="player3"
+id="${playerWithId}"
 style="width: 12rem"
 >
 <div class="row g-0">
   <div class="card-header">
     <h5
       class="card-title text-white bg-success mb-3"
-      id="player3-name"
+      id="${playerWithId}-name"
     ></h5>
     <h6
       class="card-subtitle mb-2 BJ-money"
-      id="player3-money"
+      id="${playerWithId}-money"
     ></h6>
   </div>
   <!-- body of card -->
@@ -98,11 +104,11 @@ style="width: 12rem"
     <div class="card-body">
       <h6
         class="card-subtitle mb-2 BJ-score"
-        id="player3-score"
+        id="${playerWithId}-score"
       >
         Score
       </h6>
-      <h3 class="card-text BJ-cards" id="player3-cards"></h3>
+      <h3 class="card-text BJ-cards" id="${playerWithId}-cards"></h3>
     </div>
   </div>
   <div class="col-md-4">
@@ -110,35 +116,35 @@ style="width: 12rem"
       <button
         type="button"
         class="btn btn-success btn-sm BJ-btn-hit"
-        id="player3-hit"
+        id="${playerWithId}-hit"
       >
         Hit
       </button>
       <button
         type="button"
         class="btn btn-success btn-sm BJ-btn-bet"
-        id="player3-bet"
+        id="${playerWithId}-bet"
       >
         Bet
       </button>
       <button
         type="button"
         class="btn btn-success btn-sm BJ-btn-double"
-        id="player3-double"
+        id="${playerWithId}-double"
       >
         Double
       </button>
       <button
         type="button"
         class="btn btn-success btn-sm BJ-btn-split"
-        id="player3-split"
+        id="${playerWithId}-split"
       >
         Split
       </button>
       <button
         type="button"
         class="btn btn-success btn-sm BJ-btn-done"
-        id="player3-done"
+        id="${playerWithId}-done"
       >
         Done
       </button>
@@ -148,5 +154,6 @@ style="width: 12rem"
 </div>`;
     let playerNode = document.getElementById("playerNode");
     playerNode.appendChild(div);
+    console.log(`player ${playerWithId} created in DOM`);
   }
 }

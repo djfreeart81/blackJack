@@ -38,7 +38,7 @@ export class Round {
           .addEventListener("click", (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();
-            player.bet = player.bet || this.BET;
+            player.bet = player.bet || this.game.bet || this.BET;
             player.betMoney(player.bet);
             player.status.hasBet = true;
             this.game.ui.disableButtonById(player, ["bet"], true);
