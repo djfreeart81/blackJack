@@ -37,6 +37,18 @@ export class Ui {
     }
   }
 
+  hideButtonByClass(classId, bool) {
+    let elements = document.querySelectorAll(classId);
+    elements.forEach((el) => {
+      console.log(el);
+      if (bool) {
+        el.style.display = "none";
+      } else {
+        el.style.display = "block";
+      }
+    });
+  }
+
   hideClass(classId, bool) {
     let param = bool ? "none" : "block";
     let elements = document.getElementsByClassName(classId);

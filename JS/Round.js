@@ -112,6 +112,9 @@ export class Round {
     for (let el of elementsSplit) {
       el.disabled = true;
     }
+
+    this.game.ui.hideClass("BJ-btn-split", true);
+
     let elementsDone = document.getElementsByClassName("BJ-btn-done");
     for (let el of elementsDone) {
       el.disabled = false;
