@@ -77,7 +77,7 @@
 
         <!-- player card -->
         <div class="container pt-5">
-          <div class="row">
+          <div class="row" id="playerNode">
             <!-- player1 -->
             <div class="col-sm-5">
               <div
@@ -221,6 +221,8 @@
                 </div>
               </div>
             </div>
+            <!-- player3 -->
+            <div class="col-sm-5" id="player3"></div>
           </div>
         </div>
       </div>
@@ -287,6 +289,15 @@
                 class="form-control"
                 id="playerNameInput2"
                 placeholder="Input Player 2 name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="playerNameInput3" class="form-label">Player 3</label>
+              <input
+                type="text"
+                class="form-control"
+                id="playerNameInput3"
+                placeholder="Input Player 3 name"
               />
             </div>
             <label for="betRange" class="form-label"

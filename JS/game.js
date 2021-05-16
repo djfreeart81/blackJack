@@ -4,8 +4,9 @@ import { Game } from "./GameClass.js";
 
 const player1 = new Player("GG", 1000);
 const player2 = new Player("Lenny", 1000);
+const player3 = new Player("Fantome", 1000);
 const CARD_DECK_SIZE = 4;
-const game = new Game([player1, player2]);
+const game = new Game([player1, player2, player3]);
 let round;
 let bank;
 
@@ -14,6 +15,9 @@ console.log(
 );
 console.log(
   `Player ${player2.name} created with id ${player2.id} and ${player2.money} $`
+);
+console.log(
+  `Player ${player3.name} created with id ${player3.id} and ${player3.money} $`
 );
 
 game.initializeGame();

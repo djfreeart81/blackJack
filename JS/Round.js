@@ -16,6 +16,9 @@ export class Round {
     document.getElementById("new-round").addEventListener("click", (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
+      this.players.forEach(
+        (player) => (player.bet = +document.getElementById("betRange").value)
+      );
       main();
     });
     this.players.forEach((player) => {
@@ -145,6 +148,11 @@ export class Round {
       this.players.pop(player);
       this.endRoundPlayer(player);
     }
+  }
+
+  splitCard(player) {
+    this.game.ui.drawSplit(player);
+    //TODO: implement
   }
 
   clearCards() {
