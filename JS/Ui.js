@@ -108,7 +108,7 @@ style="width: 12rem"
       >
         Score
       </h6>
-      <h3 class="card-text BJ-cards" id="${playerWithId}-cards"></h3>
+      <h1 class="card-text BJ-cards" id="${playerWithId}-cards"></h1>
     </div>
   </div>
   <div class="col-md-4">
