@@ -6,6 +6,9 @@ export class PlayerSplit extends Player{
     this.bet = player.bet
     this.finalScore = 0;
     this.status = { isPlaying: true, hasBet: true, isDone: false };
+    this.setSubObj(player);
   }
-  
+  setSubObj(player){
+    player.playerSplit = this
+  }
 }
