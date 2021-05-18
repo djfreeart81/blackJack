@@ -70,7 +70,7 @@ export class Round {
             //TODO: implement split logic: create 2 hands: with 2 sets of buttons or same buttons but for each hand)
             this.game.ui.hideButtonById(`player${player.id}-split`, true);
             this.game.ui.drawSplit(player);
-            console.log("split listener called");
+            document.getElementById(`player${player.id}-splitView-hit`).addEventListener( "click", this.hit);
           });
       }
       if (document.getElementById(`player${player.id}-done`)) {
@@ -182,5 +182,14 @@ export class Round {
       true
     );
     player.setPlayerBorderRed(true);
+  }
+  
+  
+ //TODO: finish this
+  hit(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+            this.addNewCard(player.playerSplit);
+            this.game.ui.disableButtonById(player.playerSplit, ["double"], true);
   }
 }
