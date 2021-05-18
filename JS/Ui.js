@@ -81,7 +81,7 @@ export class Ui {
   drawPlayer(player) {
     let playerWithId = `player${player.getId()}`;
     let div = document.createElement("div");
-    div.className = "col-sm-5";
+    div.className = "col-sm-5 bg-transparent";
     div.id = playerWithId;
     div.innerHTML = `<div
 class="card text-center border-secondary mb-3"
@@ -108,7 +108,7 @@ style="width: 12rem"
       >
         Score
       </h6>
-      <h1 class="card-text BJ-cards" id="${playerWithId}-cards"></h1>
+      <h3 class="card-text BJ-cards" id="${playerWithId}-cards"></h3>
     </div>
   </div>
   <div class="col-md-4">
