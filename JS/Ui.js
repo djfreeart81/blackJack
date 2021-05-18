@@ -75,7 +75,70 @@ export class Ui {
   }
 
   drawSplit(player) {
-    //TODO: implement
+    let playerWithId = `player${player.getId()}-splitView}`;
+    let div = document.createElement("div");
+    div.className = "col-sm-5 bg-transparent";
+    div.id = playerWithId;
+    div.innerHTML = `<div
+    class="card text-center border-secondary mb-3"
+    id="${playerWithId}"
+    style="width: 12rem"
+    >
+    <div class="row g-0">
+      <div class="card-header">
+        <h5
+          class="card-title text-white bg-success mb-3"
+          id="${playerWithId}-name"
+        ></h5>
+        <h6
+          class="card-subtitle mb-2 BJ-money"
+          id="${playerWithId}-money"
+        ></h6>
+      </div>
+    <div class="col-md-8">
+    <div class="card-body">
+      <h6
+        class="card-subtitle mb-2 BJ-score"
+        id="${playerWithId}-score"
+      >
+        Score
+      </h6>
+      <h3 class="card-text BJ-cards" id="${playerWithId}-cards"></h3>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="d-grid gap-2">
+      <button
+        type="button"
+        class="btn btn-success btn-sm BJ-btn-hit"
+        id="${playerWithId}-hit"
+      >
+        Hit
+      </button>
+      <button
+        type="button"
+        class="btn btn-success btn-sm BJ-btn-double"
+        id="${playerWithId}-double"
+      >
+        Double
+      </button>
+      <button
+        type="button"
+        class="btn btn-success btn-sm BJ-btn-done"
+        id="${playerWithId}-done"
+      >
+        Done
+      </button>
+    </div>
+  </div>
+</div>
+</div>`;
+    let playerDiv = document.getElementById(`player${player.getId()}`);
+    playerDiv.appendChild(div);
+    document.getElementById(
+      `${playerWithId}-name`
+    ).innerText = `${player.name}-split`;
+    console.log(`player ${playerWithId}-splitView created in DOM`);
   }
 
   drawPlayer(player) {

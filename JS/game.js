@@ -11,7 +11,9 @@ let round;
 let bank;
 
 console.log(
-  `Player ${player1.name} created with id ${player1.id} and ${player1.money} $`
+  `Player ${player1.name} created with id ${player1.id} and ${
+    player1.money
+  } $ and localStored name is ${localStorage.getItem("player1")}`
 );
 console.log(
   `Player ${player2.name} created with id ${player2.id} and ${player2.money} $`

@@ -10,11 +10,11 @@ export class Game {
 
   initializeGame() {
     this.ui.addInfoMessage("Click on New Game to start.");
-    document.getElementById("playerNameInput1").textContent =
+    document.getElementById("playerNameInput1").defaultValue =
       localStorage.getItem("player1") || "Input your name";
-    document.getElementById("playerNameInput2").textContent =
+    document.getElementById("playerNameInput2").defaultValue =
       localStorage.getItem("player2") || "Input your name";
-    document.getElementById("playerNameInput3").textContent =
+    document.getElementById("playerNameInput3").defaultValue =
       localStorage.getItem("player3") || "Input your name";
 
     //add listener to modal inside button new game
@@ -22,15 +22,11 @@ export class Game {
     btnOk.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      let name1 = document.getElementById("playerNameInput1").value;
-      let name2 = document.getElementById("playerNameInput2").value;
-      let name3 = document.getElementById("playerNameInput3").value;
-      this.players[0].setName(name1);
-      this.players[1].setName(name2);
-      this.players[2].setName(name3);
-      localStorage.setItem("player1", name1);
-      localStorage.setItem("player2", name2);
-      localStorage.setItem("player3", name3);
+      for (let i = 1; i < this.players.length + 1; i++) {
+        let name = document.getElementById(`playerNameInput${i}`).value;
+        this.players[i - 1].setName(name);
+        localStorage.setItem(`player${i}`, name);
+      }
       this.bet = +document.getElementById("betRange").value;
       main();
     });

@@ -69,6 +69,8 @@ export class Round {
             event.stopImmediatePropagation();
             //TODO: implement split logic: create 2 hands: with 2 sets of buttons or same buttons but for each hand)
             this.game.ui.hideButtonById(`player${player.id}-split`, true);
+            this.game.ui.drawSplit(player);
+            console.log("split listener called");
           });
       }
       if (document.getElementById(`player${player.id}-done`)) {
