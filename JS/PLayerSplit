@@ -1,0 +1,8 @@
+export class PlayerSplit extends Player{
+  constructor(player){
+    super(player.name,player.money)
+    this.cards = [];
+    this.cards.push(player.cards.pop())
+  }
+  
+}
