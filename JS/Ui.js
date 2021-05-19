@@ -75,7 +75,7 @@ export class Ui {
   }
 
   drawSplit(player) {
-    let playerWithId = `player${player.getId()}-splitView}`;
+    let playerWithId = `player${player.getId()}-splitView`;
     let div = document.createElement("div");
     div.className = "col-sm-5 bg-transparent";
     div.id = playerWithId;
