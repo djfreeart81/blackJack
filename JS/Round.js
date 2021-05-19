@@ -72,7 +72,7 @@ export class Round {
             this.game.ui.drawSplit(player);
             document
               .getElementById(`player${player.id}-splitView-hit`)
-              .addEventListener("click", this.hit(e, player)); //pass the event to hit function
+              .addEventListener("click", e => this.hit(e, player)); //pass the event to hit function
             console.log(player);
           });
       }
