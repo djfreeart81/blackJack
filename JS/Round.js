@@ -1,6 +1,8 @@
 import { Bank } from "./Bank.js";
 import { CardDeck } from "./CardDeck.js";
 import { main } from "./game.js";
+import { Player } from "./Player.js";
+import { PlayerSplit } from "./PlayerSplit.js";
 
 export class Round {
   constructor(game, players, cardDeckSize) {
@@ -70,9 +72,10 @@ export class Round {
             //TODO: implement split logic: create 2 hands: with 2 sets of buttons or same buttons but for each hand)
             this.game.ui.hideButtonById(`player${player.id}-split`, true);
             this.game.ui.drawSplit(player);
+            player.playerSplit = new PlayerSplit(player);
             document
               .getElementById(`player${player.id}-splitView-hit`)
-              .addEventListener("click", e => this.hit(e, player)); //pass the event to hit function
+              .addEventListener("click", (e) => this.hit(e, player));
             console.log(player);
           });
       }
@@ -128,11 +131,22 @@ export class Round {
   }
 
   drawPlayerCards(player) {
-    if (document.getElementById(`player${player.getId()}-cards`)) {
-      document.getElementById(`player${player.getId()}-cards`).innerHTML =
-        player.cards.reduce((acc, i) => acc + i.image, "");
-      document.getElementById(`player${player.getId()}-score`).innerHTML =
-        "score: " + player.calculateScore();
+    if (player instanceof Player) {
+      if (document.getElementById(`player${player.getId()}-cards`)) {
+        document.getElementById(`player${player.getId()}-cards`).innerHTML =
+          player.cards.reduce((acc, i) => acc + i.image, "");
+        document.getElementById(`player${player.getId()}-score`).innerHTML =
+          "score: " + player.calculateScore();
+      }
+    } else if (player instanceof PlayerSplit) {
+      if (document.getElementById(`player${player.getId()}-SplitView-cards`)) {
+        document.getElementById(
+          `player${player.getId()}-SplitView-cards`
+        ).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "");
+        document.getElementById(
+          `player${player.getId()}-SplitView-score`
+        ).innerHTML = "score: " + player.calculateScore();
+      }
     }
   }
 
@@ -148,7 +162,7 @@ export class Round {
   addNewCard(player) {
     let newCard = this.cardDeck.getCard();
     player.cards.push(newCard);
-    this.drawPlayerCards(player);
+    this.drawPlayerCards(player); //TODO: handle the case when player is a PlayerSplit
     console.log(
       `card added for player${player.getId()} and value is ${newCard.value}`
     );
@@ -191,7 +205,8 @@ export class Round {
   hit(e, player) {
     e.preventDefault();
     e.stopImmediatePropagation();
+    this.addNewCard(player);
     this.addNewCard(player.playerSplit);
-    this.game.ui.disableButtonById(player.playerSplit, ["double"], true);
+    this.game.ui.disableButtonById(player, ["splitView-double"], true);
   }
 }

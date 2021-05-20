@@ -1,3 +1,6 @@
+import { Player } from "./Player.js";
+import { PlayerSplit } from "./PlayerSplit.js";
+
 export class Ui {
   constructor() {
     this.progressBarObj = { value: 0 };
@@ -138,7 +141,7 @@ export class Ui {
     document.getElementById(
       `${playerWithId}-name`
     ).innerText = `${player.name}-split`;
-    console.log(`player ${playerWithId}-splitView created in DOM`);
+    console.log(`player ${playerWithId} created in DOM`);
   }
 
   drawPlayer(player) {
