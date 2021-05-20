@@ -139,12 +139,12 @@ export class Round {
           "score: " + player.calculateScore();
       }
     } else if (player instanceof PlayerSplit) {
-      if (document.getElementById(`player${player.getId()}-SplitView-cards`)) {
+      if (document.getElementById(`player${player.getId()}-splitView-cards`)) {
         document.getElementById(
-          `player${player.getId()}-SplitView-cards`
+          `player${player.getId()}-splitView-cards`
         ).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "");
         document.getElementById(
-          `player${player.getId()}-SplitView-score`
+          `player${player.getId()}-splitView-score`
         ).innerHTML = "score: " + player.calculateScore();
       }
     }
