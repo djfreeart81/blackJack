@@ -1,7 +1,7 @@
 import { Player } from "./Player.js";
 export class PlayerSplit extends Player {
   constructor(player) {
-    super(player.name, player.money);
+    super(player.name + "-split", player.money);
     this.cards = [];
     this.id = player.getId();
     this.cards.push(player.cards.pop());

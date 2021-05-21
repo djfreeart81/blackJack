@@ -73,9 +73,14 @@ export class Round {
             this.game.ui.hideButtonById(`player${player.id}-split`, true);
             this.game.ui.drawSplit(player);
             player.playerSplit = new PlayerSplit(player);
-            document
-              .getElementById(`player${player.id}-splitView-hit`)
-              .addEventListener("click", (e) => this.hit(e, player));
+            this.drawPlayerCards(player);
+            document.getElementById(
+              `player${player.getId()}-splitView-cards`
+            ).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "");
+            document.getElementById(
+              `player${player.getId()}-splitView-score`
+            ).innerHTML = "score: " + player.calculateScore();
+            this.launchListenerSplit(player);
             console.log(player);
           });
       }
@@ -201,12 +206,24 @@ export class Round {
     player.setPlayerBorderRed(true);
   }
 
+  //TODO/ put the listener at the right place
+  launchListenerSplit(player) {
+    if (document.getElementById(`player${player.id}-splitView-hit`)) {
+      document
+        .getElementById(`player${player.id}-splitView-hit`)
+        .addEventListener("click", (e) => this.hit(e, player));
+    }
+  }
   //TODO: finish this
   hit(e, player) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    this.addNewCard(player);
-    this.addNewCard(player.playerSplit);
+    document.getElementById(
+      `player${player.getId()}-splitView-cards`
+    ).innerHTML = player.cards.reduce((acc, i) => acc + i.image, "");
+    document.getElementById(
+      `player${player.getId()}-splitView-score`
+    ).innerHTML = "score: " + player.calculateScore();
     this.game.ui.disableButtonById(player, ["splitView-double"], true);
   }
 }
